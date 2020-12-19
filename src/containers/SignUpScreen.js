@@ -35,7 +35,7 @@ const SignUpScreen = ({navigation}) => {
             displayName: n,
           })
           .then(() => {
-            navigation.replace('HomeScreen');
+            navigation.replace('MainTabs');
           });
       })
       .catch((error) => {

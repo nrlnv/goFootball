@@ -8,7 +8,7 @@ const LoadingScreen = ({navigation}) => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authenticate) => {
       if (authenticate) {
-        navigation.replace('HomeScreen');
+        navigation.replace('MainTabs');
       } else {
         navigation.replace('SignInScreen');
       }
