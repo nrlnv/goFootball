@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 import Button from '../components/Button';
 import Logo from '../components/Logo';
 
-const HomeScreen = ({navigation}) => {
+const ProfileScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
 
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default ProfileScreen;

@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import HomeScreen from '../containers/HomeScreen';
+import MainTabs from '../routers/MainTabs';
 import SignInScreen from '../containers/SignInScreen';
 import SignUpScreen from '../containers/SignUpScreen';
 import LoadingScreen from '../containers/LoadingScreen';
@@ -20,7 +20,13 @@ const MainNavigator = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen
+          name="MainTabs"
+          component={MainTabs}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="SignInScreen"
           component={SignInScreen}

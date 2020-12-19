@@ -22,7 +22,7 @@ const SignInScreen = ({navigation}) => {
       .auth()
       .signInWithEmailAndPassword(e, p)
       .then(() => {
-        navigation.replace('HomeScreen');
+        navigation.replace('MainTabs');
       })
       .catch((error) => {
         alert(error.message);
