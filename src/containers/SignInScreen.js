@@ -49,7 +49,7 @@ const SignInScreen = ({navigation}) => {
               secureTextEntry={true}
               autoCorrect={false}
               autoCapitalize="none"
-              keyboardType="email-address"
+              keyboardType="default"
               onChangeText={(p) => setPassword(p)}
             />
           </Item>

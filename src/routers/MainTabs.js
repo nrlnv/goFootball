@@ -1,7 +1,8 @@
 import React from 'react';
 
-import MainScreen from '../containers/MainScreen';
+import GamesScreen from '../containers/GamesScreen';
 import ProfileScreen from '../containers/ProfileScreen';
+import FieldsScreen from '../containers/FieldsScreen';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -12,12 +13,22 @@ const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
   return (
-    <Tab.Navigator initialRouteName="MainScreen">
+    <Tab.Navigator initialRouteName="GamesScreen">
       <Tab.Screen
-        name="MainScreen"
-        component={MainScreen}
+        name="GamesScreen"
+        component={GamesScreen}
         options={{
           tabBarLabel: 'Games',
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="sports-soccer" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="FieldsScreen"
+        component={FieldsScreen}
+        options={{
+          tabBarLabel: 'Football fields',
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons
               name="soccer-field"
