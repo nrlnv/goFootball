@@ -25,7 +25,16 @@ const MainNavigator = () => {
           name="MainTabs"
           component={MainTabs}
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerTitle: '',
+            headerStyle: {
+              shadowColor: 'transparent',
+              height: 30,
+              elevation: 0,
+            },
+            headerLeft: () => {
+              return null;
+            },
           }}
         />
         <Stack.Screen

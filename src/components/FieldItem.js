@@ -12,23 +12,23 @@ const FieldItem = ({item}) => (
     </View>
     <View>
       <View style={styles.flexD}>
-        <Icon name="location-pin" size={16} />
+        <Icon name="location-pin" size={16} color="#d1d7f4" />
         <Text style={styles.bodyText}>{item.address}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="phone" size={16} />
+        <Icon name="phone" size={16} color="#d1d7f4" />
         <Text style={styles.bodyText}>{item.phone}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="people" size={16} />
+        <Icon name="people" size={16} color="#d1d7f4" />
         <Text style={styles.bodyText}>{item.count}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="attach-money" size={16} />
+        <Icon name="attach-money" size={16} color="#d1d7f4" />
         <Text style={styles.bodyText}>{item.price}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon1 name="soccer-field" size={16} />
+        <Icon1 name="soccer-field" size={16} color="#d1d7f4" />
         <Text style={styles.bodyText}>{item.field}</Text>
       </View>
     </View>
@@ -38,30 +38,32 @@ const FieldItem = ({item}) => (
 const styles = StyleSheet.create({
   mainView: {
     marginHorizontal: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#3e206d',
     padding: 10,
-    borderRadius: 2,
-    shadowColor: '#000',
+    borderRadius: 10,
+    shadowColor: '#3e206d',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.35,
+    shadowOpacity: 0.55,
     shadowRadius: 5.84,
-
     elevation: 5,
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 10,
   },
   headerView: {
     marginBottom: 10,
   },
   headerText: {
     fontSize: 20,
-    fontWeight: '500',
+    fontWeight: '700',
+    color: '#fb74bb',
   },
   bodyText: {
     fontSize: 15,
     marginLeft: 10,
+    color: '#d1d7f4',
   },
   flexD: {
     flexDirection: 'row',

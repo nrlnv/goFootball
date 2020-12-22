@@ -12,7 +12,7 @@ const Button = ({onPress, text = '', style}) => (
 const styles = StyleSheet.create({
   button: {
     marginHorizontal: 20,
-    backgroundColor: 'blue',
+    backgroundColor: '#3e206d',
     height: 40,
     marginTop: 20,
     borderRadius: 15,

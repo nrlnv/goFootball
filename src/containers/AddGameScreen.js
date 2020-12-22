@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const MainScreen = () => {
+const AddGameScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <Text>Main screen</Text>
+        <Text>Add game screen</Text>
       </View>
     </View>
   );
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default AddGameScreen;

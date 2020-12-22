@@ -37,12 +37,14 @@ const ProfileScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Logo />
-      <View style={styles.userDetails}>
-        <Text>Hey {name}</Text>
-        <Text>You are signed in as {email}</Text>
+      <View style={styles.mainContainer}>
+        <Logo />
+        <View style={styles.userDetails}>
+          <Text>Hey {name}</Text>
+          <Text>You are signed in as {email}</Text>
+        </View>
+        <Button text="Sign out" onPress={() => signOutUser()} />
       </View>
-      <Button text="Sign out" onPress={() => signOutUser()} />
     </View>
   );
 };
@@ -50,7 +52,13 @@ const ProfileScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#3e206d',
+  },
+  mainContainer: {
     backgroundColor: 'white',
+    flex: 1,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
   },
   logoContainer: {
     alignItems: 'center',
