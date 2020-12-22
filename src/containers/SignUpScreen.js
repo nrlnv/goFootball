@@ -24,18 +24,23 @@ const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('+77474041064');
 
-  const signUpUser = (e, n, p) => {
+  const signUpUser = (_email, _name, _password, _phone) => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(e, p)
+      .createUserWithEmailAndPassword(_email, _password)
       .then((authenticate) => {
         return authenticate.user
           .updateProfile({
-            displayName: n,
+            displayName: _name,
+            phoneNumber: _phone,
           })
           .then(() => {
-            navigation.replace('MainTabs');
+            authenticate.user
+              .sendEmailVerification()
+              .then(() => console.log('Verification sent1'));
+            navigation.replace('VerificationScreen');
           });
       })
       .catch((error) => {

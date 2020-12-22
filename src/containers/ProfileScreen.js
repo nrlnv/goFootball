@@ -11,6 +11,8 @@ const ProfileScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
 
+  var user = firebase.auth().currentUser;
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authenticate) => {
       if (authenticate) {

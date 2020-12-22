@@ -6,6 +6,7 @@ import MainTabs from '../routers/MainTabs';
 import SignInScreen from '../containers/SignInScreen';
 import SignUpScreen from '../containers/SignUpScreen';
 import LoadingScreen from '../containers/LoadingScreen';
+import VerificationScreen from '../containers/VerificationScreen';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,13 @@ const MainNavigator = () => {
         <Stack.Screen
           name="SignUpScreen"
           component={SignUpScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="VerificationScreen"
+          component={VerificationScreen}
           options={{
             headerShown: false,
           }}
