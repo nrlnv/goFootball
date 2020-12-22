@@ -6,6 +6,7 @@ import {
   Text,
   KeyboardAvoidingView,
   Keyboard,
+  Image,
 } from 'react-native';
 
 import * as firebase from 'firebase';
@@ -51,7 +52,17 @@ const SignUpScreen = ({navigation}) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="position" enabled>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <Logo />
+        {/* <Logo /> */}
+        <TouchableOpacity style={styles.photoView}>
+          <View style={styles.avatar}>
+            <Image
+              source={require('../assets/avatar.png')}
+              style={{width: 100, height: 100}}
+            />
+          </View>
+          <Text style={styles.choosePhotoText}>Choose photo</Text>
+        </TouchableOpacity>
+
         <Form style={styles.form}>
           <Item floatingLabel>
             <Label>Email</Label>
@@ -87,7 +98,6 @@ const SignUpScreen = ({navigation}) => {
           />
         </Form>
         <View style={styles.footer}>
-          <Text>OR</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
             <Text>Already have an account?</Text>
           </TouchableOpacity>
@@ -119,6 +129,23 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: 'center',
+  },
+  avatar: {
+    backgroundColor: '#3e206d',
+    borderRadius: 150 / 2,
+    width: 120,
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  photoView: {
+    marginTop: 100,
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  choosePhotoText: {
+    fontSize: 20,
+    marginTop: 10,
   },
 });
 
