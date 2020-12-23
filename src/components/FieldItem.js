@@ -1,9 +1,9 @@
 import React from 'react';
-
 import {Text, StyleSheet, View} from 'react-native';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {colors, scale} from '../constants/globalStyles';
 
 const FieldItem = ({item}) => (
   <View style={styles.mainView}>
@@ -12,23 +12,23 @@ const FieldItem = ({item}) => (
     </View>
     <View>
       <View style={styles.flexD}>
-        <Icon name="location-pin" size={16} color="#d1d7f4" />
+        <Icon name="location-pin" size={16} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.address}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="phone" size={16} color="#d1d7f4" />
+        <Icon name="phone" size={16} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.phone}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="people" size={16} color="#d1d7f4" />
+        <Icon name="people" size={16} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.count}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="attach-money" size={16} color="#d1d7f4" />
+        <Icon name="attach-money" size={16} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.price}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon1 name="soccer-field" size={16} color="#d1d7f4" />
+        <Icon1 name="soccer-field" size={16} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.field}</Text>
       </View>
     </View>
@@ -37,16 +37,16 @@ const FieldItem = ({item}) => (
 
 const styles = StyleSheet.create({
   mainView: {
-    marginHorizontal: 10,
-    backgroundColor: '#3e206d',
-    padding: 10,
-    borderRadius: 10,
-    shadowColor: '#3e206d',
+    marginHorizontal: scale(10),
+    backgroundColor: colors.marzipan,
+    padding: scale(20),
+    borderRadius: scale(20),
+    shadowColor: colors.cherry,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.55,
+    shadowOpacity: 0.95,
     shadowRadius: 5.84,
     elevation: 5,
     marginBottom: 10,
@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#fb74bb',
+    color: colors.cherry,
   },
   bodyText: {
     fontSize: 15,
     marginLeft: 10,
-    color: '#d1d7f4',
+    color: colors.cherry,
   },
   flexD: {
     flexDirection: 'row',

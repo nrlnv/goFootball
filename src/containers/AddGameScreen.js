@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
+import {colors, scale} from '../constants/globalStyles';
+
 const AddGameScreen = () => {
   return (
     <View style={styles.container}>
@@ -14,13 +16,13 @@ const AddGameScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3e206d',
+    backgroundColor: colors.mulled,
   },
   mainContainer: {
-    backgroundColor: 'white',
+    backgroundColor: colors.cherry,
     flex: 1,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: scale(50),
+    borderBottomRightRadius: scale(50),
   },
 });
 

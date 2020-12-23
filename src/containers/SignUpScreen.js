@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-
 import {
   View,
   StyleSheet,
@@ -7,11 +6,8 @@ import {
   KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
-
 import * as firebase from 'firebase';
-
 import {Form, Item, Input, Label} from 'native-base';
-
 import {
   TouchableWithoutFeedback,
   TouchableOpacity,
@@ -19,6 +15,7 @@ import {
 
 import Button from '../components/Button';
 import Logo from '../components/Logo';
+import {colors, scale} from '../constants/globalStyles';
 
 const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -51,32 +48,35 @@ const SignUpScreen = ({navigation}) => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <Logo />
         <Form style={styles.form}>
-          <Item floatingLabel>
-            <Label>Email</Label>
+          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+            <Label style={{color: colors.cherry}}>Email</Label>
             <Input
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="email-address"
               onChangeText={(e) => setEmail(e)}
+              style={{color: colors.cherry}}
             />
           </Item>
-          <Item floatingLabel>
-            <Label>Name</Label>
+          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+            <Label style={{color: colors.cherry}}>Name</Label>
             <Input
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="name-phone-pad"
               onChangeText={(n) => setName(n)}
+              style={{color: colors.cherry}}
             />
           </Item>
-          <Item floatingLabel>
-            <Label>Password</Label>
+          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+            <Label style={{color: colors.cherry}}>Password</Label>
             <Input
               secureTextEntry={true}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="email-address"
               onChangeText={(p) => setPassword(p)}
+              style={{color: colors.cherry}}
             />
           </Item>
           <Button
@@ -86,7 +86,7 @@ const SignUpScreen = ({navigation}) => {
         </Form>
         <View style={styles.footer}>
           <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
-            <Text>Already have an account?</Text>
+            <Text style={styles.footerText}>Already have an account?</Text>
           </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>
@@ -97,25 +97,22 @@ const SignUpScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginTop: 100,
-    marginBottom: 100,
+    backgroundColor: colors.mulled,
   },
   form: {
-    padding: 20,
-    width: '100%',
-  },
-  button: {
-    marginTop: 20,
-  },
-  buttonText: {
-    color: '#fff',
+    padding: scale(20),
+    width: '90%',
+    marginBottom: scale(30),
+    backgroundColor: colors.marzipan,
+    marginHorizontal: scale(20),
+    borderRadius: scale(20),
   },
   footer: {
     alignItems: 'center',
+  },
+  footerText: {
+    color: colors.marzipan,
+    fontSize: scale(15),
   },
 });
 

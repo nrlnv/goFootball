@@ -8,6 +8,8 @@ import SignUpScreen from '../containers/SignUpScreen';
 import LoadingScreen from '../containers/LoadingScreen';
 import VerificationScreen from '../containers/VerificationScreen';
 
+import {colors} from '../constants/globalStyles';
+
 const Stack = createStackNavigator();
 
 const MainNavigator = () => {
@@ -31,6 +33,7 @@ const MainNavigator = () => {
               shadowColor: 'transparent',
               height: 30,
               elevation: 0,
+              backgroundColor: colors.cherry,
             },
             headerLeft: () => {
               return null;

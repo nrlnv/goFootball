@@ -1,8 +1,9 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, FlatList, View} from 'react-native';
+import {StyleSheet, FlatList, View} from 'react-native';
 
 import FieldItem from '../components/FieldItem';
 import {DATA} from '../constants/fields';
+import {colors, scale} from '../constants/globalStyles';
 
 const FiledsScreen = () => {
   const renderItem = ({item}) => {
@@ -24,13 +25,13 @@ const FiledsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3e206d',
+    backgroundColor: colors.mulled,
   },
   mainContainer: {
-    backgroundColor: 'white',
+    backgroundColor: colors.cherry,
     flex: 1,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: scale(50),
+    borderBottomRightRadius: scale(50),
     paddingBottom: 10,
   },
 });

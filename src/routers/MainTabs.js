@@ -1,16 +1,15 @@
 import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import GamesScreen from '../containers/GamesScreen';
 import ProfileScreen from '../containers/ProfileScreen';
 import FieldsScreen from '../containers/FieldsScreen';
 import AddGameScreen from '../containers/AddGameScreen';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View} from 'native-base';
+import {colors} from '../constants/globalStyles';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,10 +19,10 @@ const MainTabs = () => {
       initialRouteName="GamesScreen"
       tabBarOptions={{
         inactiveTintColor: 'white',
-        activeTintColor: '#fb74bb',
+        activeTintColor: colors.marzipan,
         style: {
-          backgroundColor: '#3e206d',
-          borderTopColor: '#3e206d',
+          backgroundColor: colors.mulled,
+          borderTopColor: 'transparent',
           height: 90,
         },
       }}>

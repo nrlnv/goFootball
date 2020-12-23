@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
-
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-
 import * as firebase from 'firebase';
-
 import * as ImagePicker from 'react-native-image-picker';
 
 import Button from '../components/Button';
+import {colors, scale} from '../constants/globalStyles';
 
 const ProfileScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -169,46 +167,34 @@ const ProfileScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3e206d',
+    backgroundColor: colors.mulled,
   },
   mainContainer: {
-    backgroundColor: 'white',
+    backgroundColor: colors.cherry,
     flex: 1,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginTop: 100,
-    marginBottom: 100,
+    borderBottomLeftRadius: scale(50),
+    borderBottomRightRadius: scale(50),
   },
   userDetails: {
     alignItems: 'center',
   },
-
-  button: {
-    marginTop: 20,
-  },
-  buttonText: {
-    color: '#fff',
-  },
   avatar: {
-    backgroundColor: '#3e206d',
-    borderRadius: 150 / 2,
-    width: 120,
-    height: 120,
+    backgroundColor: colors.marzipan,
+    borderRadius: scale(150 / 2),
+    width: scale(120),
+    height: scale(120),
     justifyContent: 'center',
     alignItems: 'center',
   },
   photoView: {
-    marginTop: 100,
+    marginTop: scale(100),
     alignSelf: 'center',
     alignItems: 'center',
-    marginBottom: 80,
+    marginBottom: scale(80),
   },
   choosePhotoText: {
-    fontSize: 20,
-    marginTop: 10,
+    fontSize: scale(20),
+    marginTop: scale(10),
   },
 });
 
