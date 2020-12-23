@@ -1,7 +1,13 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, KeyboardAvoidingView, Keyboard} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  KeyboardAvoidingView,
+  Keyboard,
+  View,
+} from 'react-native';
 import * as firebase from 'firebase';
-import {Form, Item, Input, Label, View} from 'native-base';
+import {Form, Item, Input, Label} from 'native-base';
 import {
   TouchableWithoutFeedback,
   TouchableOpacity,

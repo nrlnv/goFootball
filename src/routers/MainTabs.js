@@ -54,7 +54,7 @@ const MainTabs = () => {
         name="AddGameScreen"
         component={AddGameScreen}
         options={{
-          tabBarLabel: 'Add Game',
+          tabBarLabel: 'Add game',
           tabBarIcon: ({color}) => (
             <AntDesign name="pluscircle" color={color} size={30} />
           ),
