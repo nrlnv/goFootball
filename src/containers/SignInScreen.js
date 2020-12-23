@@ -39,7 +39,7 @@ const SignInScreen = ({navigation}) => {
         <Logo />
         <Form style={styles.form}>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Email</Label>
+            <Label style={{color: colors.cherry}}>Почта</Label>
             <Input
               autoCorrect={false}
               autoCapitalize="none"
@@ -49,7 +49,7 @@ const SignInScreen = ({navigation}) => {
             />
           </Item>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Password</Label>
+            <Label style={{color: colors.cherry}}>Пароль</Label>
             <Input
               secureTextEntry={true}
               autoCorrect={false}
@@ -59,12 +59,11 @@ const SignInScreen = ({navigation}) => {
               style={{color: colors.cherry}}
             />
           </Item>
-          <Button text="Sign in" onPress={() => signInUser(email, password)} />
+          <Button text="Войти" onPress={() => signInUser(email, password)} />
         </Form>
         <View style={styles.footer}>
-          <Text style={styles.footerText}>OR</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
-            <Text style={styles.footerText}>Create a new account</Text>
+            <Text style={styles.footerText}>Создать аккаунт</Text>
           </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>

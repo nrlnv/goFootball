@@ -49,7 +49,7 @@ const SignUpScreen = ({navigation}) => {
         <Logo />
         <Form style={styles.form}>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Email</Label>
+            <Label style={{color: colors.cherry}}>Почта</Label>
             <Input
               autoCorrect={false}
               autoCapitalize="none"
@@ -59,7 +59,7 @@ const SignUpScreen = ({navigation}) => {
             />
           </Item>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Name</Label>
+            <Label style={{color: colors.cherry}}>Имя</Label>
             <Input
               autoCorrect={false}
               autoCapitalize="none"
@@ -69,7 +69,7 @@ const SignUpScreen = ({navigation}) => {
             />
           </Item>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Password</Label>
+            <Label style={{color: colors.cherry}}>Пароль</Label>
             <Input
               secureTextEntry={true}
               autoCorrect={false}
@@ -80,13 +80,13 @@ const SignUpScreen = ({navigation}) => {
             />
           </Item>
           <Button
-            text="Sign up"
+            text="Зарегистрироваться"
             onPress={() => signUpUser(email, name, password)}
           />
         </Form>
         <View style={styles.footer}>
           <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
-            <Text style={styles.footerText}>Already have an account?</Text>
+            <Text style={styles.footerText}>Уже есть аккаунт?</Text>
           </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>

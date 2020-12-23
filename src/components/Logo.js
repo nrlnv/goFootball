@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 
-import {colors} from '../constants/globalStyles';
+import {colors, scale} from '../constants/globalStyles';
 
 const Logo = ({onPress, text = '', style}) => (
   <View style={styles.logoContainer}>
@@ -13,16 +13,16 @@ const Logo = ({onPress, text = '', style}) => (
 const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
-    marginTop: 100,
-    marginBottom: 80,
+    marginTop: scale(100),
+    marginBottom: scale(80),
   },
   image: {
-    width: 150,
-    height: 150,
+    width: scale(150),
+    height: scale(150),
   },
   textStyle: {
-    marginTop: 10,
-    fontSize: 20,
+    marginTop: scale(10),
+    fontSize: scale(20),
     fontWeight: '700',
     color: colors.marzipan,
   },

@@ -154,11 +154,11 @@ const ProfileScreen = ({navigation}) => {
           {/* <Text style={styles.choosePhotoText}>Choose photo</Text> */}
         </TouchableOpacity>
         <View style={styles.userDetails}>
-          <Text>Hey {name}</Text>
-          <Text>You are signed in as {email}</Text>
+          <Text style={styles.detailText}>Привет, {name}</Text>
+          <Text style={styles.detailText}>Вы вошли как {email}</Text>
+          <Button text="Выйти" onPress={() => signOutUser()} />
         </View>
         {/* <Button text="Save" onPress={() => saveSettings()} /> */}
-        <Button text="Sign out" onPress={() => signOutUser()} />
       </View>
     </View>
   );
@@ -176,7 +176,15 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: scale(50),
   },
   userDetails: {
-    alignItems: 'center',
+    backgroundColor: colors.marzipan,
+    marginHorizontal: scale(10),
+    padding: scale(20),
+    borderRadius: scale(20),
+  },
+  detailText: {
+    alignSelf: 'center',
+    fontSize: scale(15),
+    color: colors.cherry,
   },
   avatar: {
     backgroundColor: colors.marzipan,

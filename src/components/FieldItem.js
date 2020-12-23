@@ -12,23 +12,23 @@ const FieldItem = ({item}) => (
     </View>
     <View>
       <View style={styles.flexD}>
-        <Icon name="location-pin" size={16} color={colors.cherry} />
+        <Icon name="location-pin" size={scale(16)} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.address}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="phone" size={16} color={colors.cherry} />
+        <Icon name="phone" size={scale(16)} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.phone}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="people" size={16} color={colors.cherry} />
+        <Icon name="people" size={scale(16)} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.count}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon name="attach-money" size={16} color={colors.cherry} />
+        <Icon name="attach-money" size={scale(16)} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.price}</Text>
       </View>
       <View style={styles.flexD}>
-        <Icon1 name="soccer-field" size={16} color={colors.cherry} />
+        <Icon1 name="soccer-field" size={scale(16)} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.field}</Text>
       </View>
     </View>
@@ -46,28 +46,28 @@ const styles = StyleSheet.create({
       width: 0,
       height: 4,
     },
-    shadowOpacity: 0.95,
-    shadowRadius: 5.84,
-    elevation: 5,
-    marginBottom: 10,
-    marginTop: 10,
+    shadowOpacity: scale(0.95),
+    shadowRadius: scale(5.84),
+    elevation: scale(50),
+    marginBottom: scale(10),
+    marginTop: scale(10),
   },
   headerView: {
-    marginBottom: 10,
+    marginBottom: scale(10),
   },
   headerText: {
-    fontSize: 20,
+    fontSize: scale(20),
     fontWeight: '700',
     color: colors.cherry,
   },
   bodyText: {
-    fontSize: 15,
-    marginLeft: 10,
+    fontSize: scale(15),
+    marginLeft: scale(10),
     color: colors.cherry,
   },
   flexD: {
     flexDirection: 'row',
-    marginBottom: 5,
+    // marginBottom: scale(5),
   },
 });
 

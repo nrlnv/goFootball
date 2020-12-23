@@ -3,7 +3,7 @@ import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-import {colors} from '../constants/globalStyles';
+import {colors, scale} from '../constants/globalStyles';
 
 const Button = ({onPress, text = '', style}) => (
   <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
@@ -13,17 +13,17 @@ const Button = ({onPress, text = '', style}) => (
 
 const styles = StyleSheet.create({
   button: {
-    marginHorizontal: 20,
+    marginHorizontal: scale(20),
     backgroundColor: colors.mulled,
-    height: 40,
-    marginTop: 20,
-    borderRadius: 15,
+    height: scale(40),
+    marginTop: scale(20),
+    borderRadius: scale(20),
     alignItems: 'center',
     justifyContent: 'center',
   },
   textStyle: {
     color: colors.marzipan,
-    fontSize: 18,
+    fontSize: scale(16),
   },
 });
 
