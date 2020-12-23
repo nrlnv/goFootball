@@ -11,13 +11,21 @@ const AddGameScreen = ({navigation}) => {
   const [day, setDay] = useState('');
   const [time, setTime] = useState('');
   const [duration, setDuration] = useState('');
-  const [format, setFormat] = useState('');
-  const [count, setCount] = useState('');
+  const [players, setPlayers] = useState('');
   const [price, setPrice] = useState('');
+  const [phone, setPhone] = useState('');
 
   var user = firebase.auth().currentUser;
 
-  const addGame = (_field, _day, _time, _duration, _format, _count, _price) => {
+  const addGame = (
+    _field,
+    _day,
+    _time,
+    _duration,
+    _players,
+    _price,
+    _phone,
+  ) => {
     var messageListRef = firebase.database().ref('games');
     var newMessageRef = messageListRef.push();
     newMessageRef
@@ -26,10 +34,11 @@ const AddGameScreen = ({navigation}) => {
         day: _day,
         time: _time,
         duration: _duration,
-        format: _format,
-        count: _count,
+        players: _players,
         price: _price,
         addedBy: user.email,
+        phone: _phone,
+        addedTime: Date.now(),
       })
       .then(() => {
         alert('Матч создан!');
@@ -38,6 +47,13 @@ const AddGameScreen = ({navigation}) => {
       .catch((error) => {
         alert(error.message);
       });
+    setField('');
+    setDay('');
+    setTime('');
+    setDuration('');
+    setPlayers('');
+    setPrice('');
+    setPhone('');
   };
 
   return (
@@ -47,6 +63,7 @@ const AddGameScreen = ({navigation}) => {
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>Место</Label>
             <Input
+              value={field}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="email-address"
@@ -57,6 +74,7 @@ const AddGameScreen = ({navigation}) => {
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>День</Label>
             <Input
+              value={day}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="email-address"
@@ -67,6 +85,7 @@ const AddGameScreen = ({navigation}) => {
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>Время</Label>
             <Input
+              value={time}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="default"
@@ -77,6 +96,7 @@ const AddGameScreen = ({navigation}) => {
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>Длительность</Label>
             <Input
+              value={duration}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="default"
@@ -85,28 +105,20 @@ const AddGameScreen = ({navigation}) => {
             />
           </Item>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Формат</Label>
+            <Label style={{color: colors.cherry}}>Количество игроков</Label>
             <Input
+              value={players}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="default"
-              onChangeText={(x) => setFormat(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Количество команд</Label>
-            <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(x) => setCount(x)}
+              onChangeText={(x) => setPlayers(x)}
               style={{color: colors.cherry}}
             />
           </Item>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>Цена площадки за час</Label>
             <Input
+              value={price}
               autoCorrect={false}
               autoCapitalize="none"
               keyboardType="default"
@@ -114,10 +126,21 @@ const AddGameScreen = ({navigation}) => {
               style={{color: colors.cherry}}
             />
           </Item>
+          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+            <Label style={{color: colors.cherry}}>Контактный номер</Label>
+            <Input
+              value={phone}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="default"
+              onChangeText={(x) => setPhone(x)}
+              style={{color: colors.cherry}}
+            />
+          </Item>
           <Button
             text="Создать матч"
             onPress={() =>
-              addGame(field, day, time, duration, format, count, price)
+              addGame(field, day, time, duration, players, price, phone)
             }
           />
         </Form>

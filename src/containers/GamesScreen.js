@@ -1,13 +1,36 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, FlatList, StyleSheet} from 'react-native';
+import * as firebase from 'firebase';
 
+import GameItem from '../components/GameItem';
 import {colors, scale} from '../constants/globalStyles';
 
 const MainScreen = () => {
+  const [games, setGames] = useState(null);
+
+  useEffect(() => {
+    var gamesListRef = firebase.database().ref('games');
+    gamesListRef.on('value', (dataSnapshot) => {
+      if (dataSnapshot.val()) {
+        let gamesList = Object.values(dataSnapshot.val());
+        setGames(gamesList);
+        console.log(gamesList);
+      }
+    });
+  }, []);
+
+  const renderItem = ({item}) => {
+    return <GameItem item={item} />;
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <Text>Main screen</Text>
+        <FlatList
+          data={games}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => item.key}
+        />
       </View>
     </View>
   );
