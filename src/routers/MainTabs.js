@@ -30,7 +30,7 @@ const MainTabs = () => {
         name="GamesScreen"
         component={GamesScreen}
         options={{
-          tabBarLabel: 'Games',
+          tabBarLabel: 'МАТЧИ',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="sports-soccer" color={color} size={30} />
           ),
@@ -40,7 +40,7 @@ const MainTabs = () => {
         name="FieldsScreen"
         component={FieldsScreen}
         options={{
-          tabBarLabel: 'Football fields',
+          tabBarLabel: 'ФУТБОЛЬНЫЕ ПОЛЯ',
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons
               name="soccer-field"
@@ -51,20 +51,10 @@ const MainTabs = () => {
         }}
       />
       <Tab.Screen
-        name="AddGameScreen"
-        component={AddGameScreen}
-        options={{
-          tabBarLabel: 'Add game',
-          tabBarIcon: ({color}) => (
-            <AntDesign name="pluscircle" color={color} size={30} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile settings',
+          tabBarLabel: 'НАСТРОЙКИ',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="person-outline" color={color} size={30} />
           ),

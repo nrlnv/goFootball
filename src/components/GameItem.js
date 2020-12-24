@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.marzipan,
     padding: scale(20),
     borderRadius: scale(20),
-    shadowColor: colors.cherry,
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,

@@ -1,6 +1,13 @@
 import React, {useState} from 'react';
 import * as firebase from 'firebase';
-import {View, StyleSheet} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
@@ -42,7 +49,7 @@ const AddGameScreen = ({navigation}) => {
       })
       .then(() => {
         alert('Матч создан!');
-        navigation.jumpTo('GamesScreen');
+        navigation.goBack();
       })
       .catch((error) => {
         alert(error.message);
@@ -57,8 +64,8 @@ const AddGameScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.mainContainer}>
+    <KeyboardAvoidingView style={styles.container} behavior="position" enabled>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <Form style={styles.form}>
           <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>Место</Label>
@@ -144,8 +151,8 @@ const AddGameScreen = ({navigation}) => {
             }
           />
         </Form>
-      </View>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

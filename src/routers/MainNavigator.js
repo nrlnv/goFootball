@@ -1,14 +1,16 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import MainTabs from '../routers/MainTabs';
 import SignInScreen from '../containers/SignInScreen';
 import SignUpScreen from '../containers/SignUpScreen';
 import LoadingScreen from '../containers/LoadingScreen';
 import VerificationScreen from '../containers/VerificationScreen';
+import AddGameScreen from '../containers/AddGameScreen';
 
-import {colors} from '../constants/globalStyles';
+import {colors, scale} from '../constants/globalStyles';
 
 const Stack = createStackNavigator();
 
@@ -59,6 +61,32 @@ const MainNavigator = () => {
           component={VerificationScreen}
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="AddGameScreen"
+          component={AddGameScreen}
+          options={{
+            headerShown: true,
+            headerTitle: 'СОЗДАТЬ СВОЙ МАТЧ',
+            headerTitleStyle: {
+              fontSize: scale(20),
+              fontWeight: '600',
+              color: colors.marzipan,
+            },
+            headerStyle: {
+              shadowColor: 'transparent',
+              backgroundColor: colors.mulled,
+            },
+            headerBackTitle: ' ',
+            headerBackImage: () => (
+              <Icon
+                name="arrow-back"
+                color={colors.marzipan}
+                size={30}
+                style={{marginLeft: scale(10)}}
+              />
+            ),
           }}
         />
       </Stack.Navigator>

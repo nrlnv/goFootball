@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import * as firebase from 'firebase';
 
 import Logo from '../components/Logo';
 import Button from '../components/Button';
-
-import * as firebase from 'firebase';
+import {colors, scale} from '../constants/globalStyles';
 
 const FiledsScreen = ({navigation}) => {
   var user = firebase.auth().currentUser;
@@ -41,14 +41,15 @@ const FiledsScreen = ({navigation}) => {
       <Logo />
       {!user.emailVerified && (
         <View style={styles.welcomeView}>
-          <Text style={styles.title}>Welcome, {user.displayName}!</Text>
+          <Text style={styles.title}>Привет, {user.displayName}!</Text>
           <Text style={styles.body}>
-            You are almost ready to start enjoying goFootball, to complete
-            registration, please confirm your email, verification link has been
-            sent. Click Done once email is confirmed or go Back to home screen.
+            Осталось совсем немного, пожалуйста, подтвердите Ваш почтовый ящик,
+            нажав на ссылку, которую, мы отправили на Вашу почту. Нажмите
+            "Готово", после того, как подтвердите. Добро пожаловать в сообщество
+            любителей футбола!
           </Text>
-          <Button text="Done" onPress={() => isVerified()} />
-          <Button text="Back to home" onPress={() => signOutUser()} />
+          <Button text="Готово" onPress={() => isVerified()} />
+          <Button text="Назад" onPress={() => signOutUser()} />
         </View>
       )}
     </SafeAreaView>
@@ -58,32 +59,33 @@ const FiledsScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.mulled,
   },
   welcomeView: {
-    marginHorizontal: 10,
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 5,
+    marginHorizontal: scale(10),
+    backgroundColor: colors.marzipan,
+    padding: scale(20),
+    borderRadius: scale(20),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.35,
-    shadowRadius: 5.84,
-
-    elevation: 5,
+    shadowOpacity: scale(0.95),
+    shadowRadius: scale(5.84),
+    elevation: scale(5),
   },
   title: {
     alignSelf: 'center',
-    fontSize: 25,
+    fontSize: scale(20),
     fontWeight: '800',
+    color: colors.cherry,
   },
   body: {
-    fontSize: 20,
+    fontSize: scale(15),
     fontWeight: '400',
     textAlign: 'center',
+    color: colors.cherry,
   },
 });
 

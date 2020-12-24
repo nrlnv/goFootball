@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, FlatList, View} from 'react-native';
+import {StyleSheet, FlatList, View, Text} from 'react-native';
 
 import FieldItem from '../components/FieldItem';
 import {DATA} from '../constants/fields';
@@ -12,6 +12,7 @@ const FiledsScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
+        <Text style={styles.gamesText}>ФУТБОЛЬНЫЕ ПОЛЯ</Text>
         <FlatList
           data={DATA}
           renderItem={renderItem}
@@ -33,6 +34,13 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: scale(50),
     borderBottomRightRadius: scale(50),
     paddingBottom: 10,
+  },
+  gamesText: {
+    fontSize: scale(20),
+    fontWeight: '600',
+    color: colors.marzipan,
+    marginTop: scale(20),
+    marginLeft: scale(20),
   },
 });
 
