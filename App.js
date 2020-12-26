@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, {useEffect} from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import MainNavigator from './src/routers/MainNavigator';
 
 import * as firebase from 'firebase';
@@ -17,6 +17,9 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return <MainNavigator />;
 };
 
