@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, StyleSheet, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {View, FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import * as firebase from 'firebase';
 
@@ -56,6 +55,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: scale(50),
   },
   addGameView: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
     width: scale(50),
     height: scale(50),
     borderRadius: scale(150 / 2),
@@ -68,7 +70,6 @@ const styles = StyleSheet.create({
     shadowRadius: scale(5.84),
     elevation: scale(5),
     backgroundColor: colors.wax,
-    alignSelf: 'flex-end',
     justifyContent: 'center',
     alignItems: 'center',
     margin: scale(20),

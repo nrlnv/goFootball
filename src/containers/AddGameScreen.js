@@ -6,9 +6,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
-  Platform,
+  SafeAreaView,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
@@ -64,95 +67,106 @@ const AddGameScreen = ({navigation}) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="position" enabled>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <Form style={styles.form}>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Место</Label>
-            <Input
-              value={field}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(x) => setField(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>День</Label>
-            <Input
-              value={day}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(x) => setDay(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Время</Label>
-            <Input
-              value={time}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(x) => setTime(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Длительность</Label>
-            <Input
-              value={duration}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(x) => setDuration(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Количество игроков</Label>
-            <Input
-              value={players}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(x) => setPlayers(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Цена площадки за час</Label>
-            <Input
-              value={price}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(x) => setPrice(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Контактный номер</Label>
-            <Input
-              value={phone}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(x) => setPhone(x)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Button
-            text="Создать матч"
-            onPress={() =>
-              addGame(field, day, time, duration, players, price, phone)
-            }
-          />
-        </Form>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView behavior="position" enabled>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <ScrollView>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}>
+              <Icon name="arrow-back-ios" size={30} color={colors.marzipan} />
+            </TouchableOpacity>
+            <Form style={styles.form}>
+              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+                <Label style={{color: colors.cherry}}>Место</Label>
+                <Input
+                  value={field}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  onChangeText={(x) => setField(x)}
+                  style={{color: colors.cherry}}
+                />
+              </Item>
+              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+                <Label style={{color: colors.cherry}}>День</Label>
+                <Input
+                  value={day}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  onChangeText={(x) => setDay(x)}
+                  style={{color: colors.cherry}}
+                />
+              </Item>
+              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+                <Label style={{color: colors.cherry}}>Время</Label>
+                <Input
+                  value={time}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="default"
+                  onChangeText={(x) => setTime(x)}
+                  style={{color: colors.cherry}}
+                />
+              </Item>
+              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+                <Label style={{color: colors.cherry}}>Длительность</Label>
+                <Input
+                  value={duration}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="default"
+                  onChangeText={(x) => setDuration(x)}
+                  style={{color: colors.cherry}}
+                />
+              </Item>
+              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+                <Label style={{color: colors.cherry}}>Количество игроков</Label>
+                <Input
+                  value={players}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="default"
+                  onChangeText={(x) => setPlayers(x)}
+                  style={{color: colors.cherry}}
+                />
+              </Item>
+              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+                <Label style={{color: colors.cherry}}>
+                  Цена площадки за час
+                </Label>
+                <Input
+                  value={price}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="default"
+                  onChangeText={(x) => setPrice(x)}
+                  style={{color: colors.cherry}}
+                />
+              </Item>
+              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+                <Label style={{color: colors.cherry}}>Контактный номер</Label>
+                <Input
+                  value={phone}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="default"
+                  onChangeText={(x) => setPhone(x)}
+                  style={{color: colors.cherry}}
+                />
+              </Item>
+              <Button
+                text="Создать матч"
+                onPress={() =>
+                  addGame(field, day, time, duration, players, price, phone)
+                }
+              />
+            </Form>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -175,6 +189,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.marzipan,
     marginHorizontal: scale(20),
     borderRadius: scale(20),
+    flex: 1,
+  },
+  backButton: {
+    width: scale(50),
+    height: scale(50),
+    backgroundColor: colors.cherry,
+    borderRadius: scale(20),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: scale(20),
+    marginTop: scale(20),
+    marginBottom: -scale(50),
   },
 });
 

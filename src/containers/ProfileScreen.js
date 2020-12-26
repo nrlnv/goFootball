@@ -125,10 +125,7 @@ const ProfileScreen = ({navigation}) => {
                   height: 120,
                   borderRadius: 150 / 2,
                 }}
-                source={{
-                  uri:
-                    'https://firebasestorage.googleapis.com/v0/b/gofootball-84467.appspot.com/o/football_player-512.png?alt=media&token=a2777978-fca9-4d88-b46b-682fac670961',
-                }}
+                source={require('../assets/avatar.png')}
               />
             ) : photo ? (
               <Image
@@ -143,10 +140,7 @@ const ProfileScreen = ({navigation}) => {
               />
             ) : (
               <Image
-                source={{
-                  uri:
-                    'https://firebasestorage.googleapis.com/v0/b/gofootball-84467.appspot.com/o/football_player-512.png?alt=media&token=a2777978-fca9-4d88-b46b-682fac670961',
-                }}
+                source={require('../assets/avatar.png')}
                 style={{width: 100, height: 100}}
               />
             )}

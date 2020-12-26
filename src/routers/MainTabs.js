@@ -7,7 +7,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import GamesScreen from '../containers/GamesScreen';
 import ProfileScreen from '../containers/ProfileScreen';
 import FieldsScreen from '../containers/FieldsScreen';
-import AddGameScreen from '../containers/AddGameScreen';
 
 import {colors} from '../constants/globalStyles';
 

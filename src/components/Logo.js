@@ -5,7 +5,7 @@ import {colors, scale} from '../constants/globalStyles';
 
 const Logo = ({onPress, text = '', style}) => (
   <View style={styles.logoContainer}>
-    <Image source={require('../assets/logo.png')} style={styles.image} />
+    <Image source={require('../assets/avatar.png')} style={styles.image} />
     <Text style={styles.textStyle}>GOFOOTBALL</Text>
   </View>
 );

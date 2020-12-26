@@ -67,26 +67,7 @@ const MainNavigator = () => {
           name="AddGameScreen"
           component={AddGameScreen}
           options={{
-            headerShown: true,
-            headerTitle: 'СОЗДАТЬ СВОЙ МАТЧ',
-            headerTitleStyle: {
-              fontSize: scale(20),
-              fontWeight: '600',
-              color: colors.marzipan,
-            },
-            headerStyle: {
-              shadowColor: 'transparent',
-              backgroundColor: colors.mulled,
-            },
-            headerBackTitle: ' ',
-            headerBackImage: () => (
-              <Icon
-                name="arrow-back"
-                color={colors.marzipan}
-                size={30}
-                style={{marginLeft: scale(10)}}
-              />
-            ),
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
