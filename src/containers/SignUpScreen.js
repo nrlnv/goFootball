@@ -5,12 +5,14 @@ import {
   Text,
   KeyboardAvoidingView,
   Keyboard,
+  SafeAreaView,
 } from 'react-native';
 import * as firebase from 'firebase';
 import {Form, Item, Input, Label} from 'native-base';
 import {
   TouchableWithoutFeedback,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native-gesture-handler';
 
 import Button from '../components/Button';
