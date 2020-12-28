@@ -10,6 +10,7 @@ import LoadingScreen from '../containers/LoadingScreen';
 import VerificationScreen from '../containers/VerificationScreen';
 import AddGameScreen from '../containers/AddGameScreen';
 import ForgotPasswordScreen from '../containers/ForgotPasswordScreen';
+import ChangePasswordScreen from '../containers/ChangePasswordScreen';
 
 import {colors, scale} from '../constants/globalStyles';
 
@@ -74,6 +75,13 @@ const MainNavigator = () => {
         <Stack.Screen
           name="ForgotPasswordScreen"
           component={ForgotPasswordScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ChangePasswordScreen"
+          component={ChangePasswordScreen}
           options={{
             headerShown: false,
           }}

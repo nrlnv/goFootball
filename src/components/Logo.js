@@ -13,7 +13,9 @@ const Logo = ({onPress, text = '', style}) => (
 const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
-    marginVertical: scale(60),
+    position: 'absolute',
+    alignSelf: 'center',
+    top: scale(60),
   },
   image: {
     width: scale(150),

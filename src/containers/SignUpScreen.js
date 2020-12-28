@@ -5,14 +5,12 @@ import {
   Text,
   KeyboardAvoidingView,
   Keyboard,
-  SafeAreaView,
 } from 'react-native';
 import * as firebase from 'firebase';
 import {Form, Item, Input, Label} from 'native-base';
 import {
   TouchableWithoutFeedback,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native-gesture-handler';
 
 import Button from '../components/Button';
@@ -104,6 +102,7 @@ const styles = StyleSheet.create({
   form: {
     padding: scale(20),
     width: '90%',
+    marginTop: scale(300),
     marginBottom: scale(30),
     backgroundColor: colors.marzipan,
     marginHorizontal: scale(20),

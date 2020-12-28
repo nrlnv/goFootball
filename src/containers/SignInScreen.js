@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   form: {
     padding: scale(20),
     width: '90%',
+    marginTop: scale(300),
     marginBottom: scale(30),
     backgroundColor: colors.marzipan,
     marginHorizontal: scale(20),

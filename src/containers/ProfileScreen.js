@@ -54,6 +54,8 @@ const ProfileScreen = ({navigation}) => {
       });
   };
 
+  const changePassword = () => {};
+
   // const saveSettings = () => {
   //   // Create the file metadata
   //   var metadata = {
@@ -150,6 +152,10 @@ const ProfileScreen = ({navigation}) => {
         <View style={styles.userDetails}>
           <Text style={styles.detailText}>Привет, {name}</Text>
           <Text style={styles.detailText}>Вы вошли как {email}</Text>
+          <Button
+            text="Сменить пароль"
+            onPress={() => navigation.navigate('ChangePasswordScreen')}
+          />
           <Button text="Выйти" onPress={() => signOutUser()} />
         </View>
         {/* <Button text="Save" onPress={() => saveSettings()} /> */}
