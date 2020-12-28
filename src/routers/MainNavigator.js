@@ -9,6 +9,7 @@ import SignUpScreen from '../containers/SignUpScreen';
 import LoadingScreen from '../containers/LoadingScreen';
 import VerificationScreen from '../containers/VerificationScreen';
 import AddGameScreen from '../containers/AddGameScreen';
+import ForgotPasswordScreen from '../containers/ForgotPasswordScreen';
 
 import {colors, scale} from '../constants/globalStyles';
 
@@ -66,6 +67,13 @@ const MainNavigator = () => {
         <Stack.Screen
           name="AddGameScreen"
           component={AddGameScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ForgotPasswordScreen"
+          component={ForgotPasswordScreen}
           options={{
             headerShown: false,
           }}

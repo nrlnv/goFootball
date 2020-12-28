@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  KeyboardAvoidingView,
-  Keyboard,
-  View,
-} from 'react-native';
+import {StyleSheet, Keyboard, View, Text} from 'react-native';
 import * as firebase from 'firebase';
 import {Form, Item, Input, Label} from 'native-base';
 import {
@@ -14,19 +8,21 @@ import {
 } from 'react-native-gesture-handler';
 
 import Button from '../components/Button';
+
 import Logo from '../components/Logo';
 import {colors, scale} from '../constants/globalStyles';
 
-const SignInScreen = ({navigation}) => {
+const ForgotPasswordScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const signInUser = (e, p) => {
+  const resetPassword = (e) => {
     firebase
       .auth()
-      .signInWithEmailAndPassword(e, p)
+      .sendPasswordResetEmail(e)
       .then(() => {
-        navigation.replace('MainTabs');
+        console.log('password reset was sent');
+        navigation.replace('SignInScreen');
+        alert('Ссылка для смены пароля отправлена на вашу почту');
       })
       .catch((error) => {
         alert(error.message);
@@ -34,7 +30,7 @@ const SignInScreen = ({navigation}) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="position">
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <Logo />
         <Form style={styles.form}>
@@ -48,32 +44,18 @@ const SignInScreen = ({navigation}) => {
               style={{color: colors.cherry}}
             />
           </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Пароль</Label>
-            <Input
-              secureTextEntry={true}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(p) => setPassword(p)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Button text="Войти" onPress={() => signInUser(email, password)} />
+          <Button
+            text="Восстановить пароль"
+            onPress={() => resetPassword(email)}
+          />
         </Form>
         <View style={styles.footer}>
-          <TouchableOpacity
-            style={styles.footerView}
-            onPress={() => navigation.navigate('SignUpScreen')}>
-            <Text style={styles.footerText}>Создать аккаунт</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ForgotPasswordScreen')}>
-            <Text style={styles.footerText}>Забыл пароль?</Text>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.footerText}>Назад</Text>
           </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
@@ -93,13 +75,10 @@ const styles = StyleSheet.create({
   footer: {
     alignItems: 'center',
   },
-  footerView: {
-    marginBottom: scale(10),
-  },
   footerText: {
     color: colors.marzipan,
     fontSize: scale(15),
   },
 });
 
-export default SignInScreen;
+export default ForgotPasswordScreen;
