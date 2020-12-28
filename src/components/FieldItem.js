@@ -37,7 +37,7 @@ const FieldItem = ({item}) => (
 
 const styles = StyleSheet.create({
   mainView: {
-    marginHorizontal: scale(10),
+    marginHorizontal: scale(20),
     backgroundColor: colors.marzipan,
     padding: scale(20),
     borderRadius: scale(20),

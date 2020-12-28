@@ -8,7 +8,7 @@ import GamesScreen from '../containers/GamesScreen';
 import ProfileScreen from '../containers/ProfileScreen';
 import FieldsScreen from '../containers/FieldsScreen';
 
-import {colors} from '../constants/globalStyles';
+import {colors, scale} from '../constants/globalStyles';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +22,7 @@ const MainTabs = () => {
         style: {
           backgroundColor: colors.mulled,
           borderTopColor: 'transparent',
-          height: 90,
+          height: scale(75),
         },
       }}>
       <Tab.Screen

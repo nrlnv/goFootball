@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     alignSelf: 'center',
-    top: scale(60),
+    top: scale(40),
   },
   image: {
     width: scale(150),

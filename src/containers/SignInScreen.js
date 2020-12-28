@@ -5,13 +5,12 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   View,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import * as firebase from 'firebase';
 import {Form, Item, Input, Label} from 'native-base';
-import {
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
 
 import Button from '../components/Button';
 import Logo from '../components/Logo';
@@ -36,42 +35,44 @@ const SignInScreen = ({navigation}) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="position">
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <Logo />
-        <Form style={styles.form}>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Почта</Label>
-            <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(e) => setEmail(e)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Пароль</Label>
-            <Input
-              secureTextEntry={true}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="default"
-              onChangeText={(p) => setPassword(p)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Button text="Войти" onPress={() => signInUser(email, password)} />
-        </Form>
-        <View style={styles.footer}>
-          <TouchableOpacity
-            style={styles.footerView}
-            onPress={() => navigation.navigate('SignUpScreen')}>
-            <Text style={styles.footerText}>Создать аккаунт</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ForgotPasswordScreen')}>
-            <Text style={styles.footerText}>Забыл пароль?</Text>
-          </TouchableOpacity>
-        </View>
+        <SafeAreaView>
+          <Logo />
+          <Form style={styles.form}>
+            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+              <Label style={{color: colors.cherry}}>Почта</Label>
+              <Input
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                onChangeText={(e) => setEmail(e)}
+                style={{color: colors.cherry}}
+              />
+            </Item>
+            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+              <Label style={{color: colors.cherry}}>Пароль</Label>
+              <Input
+                secureTextEntry={true}
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="default"
+                onChangeText={(p) => setPassword(p)}
+                style={{color: colors.cherry}}
+              />
+            </Item>
+            <Button text="Войти" onPress={() => signInUser(email, password)} />
+          </Form>
+          <View style={styles.footer}>
+            <TouchableOpacity
+              style={styles.footerView}
+              onPress={() => navigation.navigate('SignUpScreen')}>
+              <Text style={styles.footerText}>Создать аккаунт</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ForgotPasswordScreen')}>
+              <Text style={styles.footerText}>Забыл пароль?</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
@@ -84,11 +85,10 @@ const styles = StyleSheet.create({
   },
   form: {
     padding: scale(20),
-    width: '90%',
+    marginHorizontal: scale(20),
     marginTop: scale(300),
     marginBottom: scale(30),
     backgroundColor: colors.marzipan,
-    marginHorizontal: scale(20),
     borderRadius: scale(20),
   },
   footer: {

@@ -1,19 +1,16 @@
 import React, {useState} from 'react';
 import {
-  View,
+  SafeAreaView,
   StyleSheet,
-  Text,
   KeyboardAvoidingView,
   Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import * as firebase from 'firebase';
 import {Form, Item, Input, Label} from 'native-base';
-import {
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
 
 import Button from '../components/Button';
+import BackButton from '../components/BackButton';
 import Logo from '../components/Logo';
 import {colors, scale} from '../constants/globalStyles';
 
@@ -46,49 +43,47 @@ const SignUpScreen = ({navigation}) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="position" enabled>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <Logo />
-        <Form style={styles.form}>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Почта</Label>
-            <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(e) => setEmail(e)}
-              style={{color: colors.cherry}}
+        <SafeAreaView>
+          <BackButton />
+          <Logo />
+          <Form style={styles.form}>
+            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+              <Label style={{color: colors.cherry}}>Почта</Label>
+              <Input
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                onChangeText={(e) => setEmail(e)}
+                style={{color: colors.cherry}}
+              />
+            </Item>
+            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+              <Label style={{color: colors.cherry}}>Имя</Label>
+              <Input
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="name-phone-pad"
+                onChangeText={(n) => setName(n)}
+                style={{color: colors.cherry}}
+              />
+            </Item>
+            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+              <Label style={{color: colors.cherry}}>Пароль</Label>
+              <Input
+                secureTextEntry={true}
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                onChangeText={(p) => setPassword(p)}
+                style={{color: colors.cherry}}
+              />
+            </Item>
+            <Button
+              text="Зарегистрироваться"
+              onPress={() => signUpUser(email, name, password)}
             />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Имя</Label>
-            <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="name-phone-pad"
-              onChangeText={(n) => setName(n)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Пароль</Label>
-            <Input
-              secureTextEntry={true}
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(p) => setPassword(p)}
-              style={{color: colors.cherry}}
-            />
-          </Item>
-          <Button
-            text="Зарегистрироваться"
-            onPress={() => signUpUser(email, name, password)}
-          />
-        </Form>
-        <View style={styles.footer}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
-            <Text style={styles.footerText}>Уже есть аккаунт?</Text>
-          </TouchableOpacity>
-        </View>
+          </Form>
+        </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
@@ -101,19 +96,11 @@ const styles = StyleSheet.create({
   },
   form: {
     padding: scale(20),
-    width: '90%',
-    marginTop: scale(300),
+    marginTop: scale(200),
     marginBottom: scale(30),
     backgroundColor: colors.marzipan,
     marginHorizontal: scale(20),
     borderRadius: scale(20),
-  },
-  footer: {
-    alignItems: 'center',
-  },
-  footerText: {
-    color: colors.marzipan,
-    fontSize: scale(15),
   },
 });
 

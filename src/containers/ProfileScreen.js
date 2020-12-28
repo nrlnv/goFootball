@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import * as firebase from 'firebase';
 import * as ImagePicker from 'react-native-image-picker';
 
@@ -177,7 +184,7 @@ const styles = StyleSheet.create({
   },
   userDetails: {
     backgroundColor: colors.marzipan,
-    marginHorizontal: scale(10),
+    marginHorizontal: scale(20),
     padding: scale(20),
     borderRadius: scale(20),
   },
@@ -195,7 +202,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   photoView: {
-    marginTop: scale(100),
+    marginTop: scale(40),
     alignSelf: 'center',
     alignItems: 'center',
     marginBottom: scale(80),
