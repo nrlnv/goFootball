@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, FlatList, StyleSheet, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import * as firebase from 'firebase';
 
@@ -28,16 +28,22 @@ const MainScreen = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.mainContainer}>
         <Text style={styles.gamesText}>МАТЧИ</Text>
-        <FlatList
-          data={games}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => item.key}
-        />
+        {games ? (
+            <FlatList
+              data={games}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => item.key}
+            />
+        ) : (
+            <ActivityIndicator size="large" color={colors.marzipan} />
+        )}
         <TouchableOpacity
-          style={styles.addGameView}
-          onPress={() => navigation.navigate('AddGameScreen')}>
-          <Icon name="plus" color={colors.mulled} size={30} />
-        </TouchableOpacity>
+              style={styles.addGameView}
+              onPress={() => navigation.navigate('AddGameScreen')}>
+              <Icon name="plus" color={colors.mulled} size={30} />
+            </TouchableOpacity>
+        
+        
       </View>
     </View>
   );
