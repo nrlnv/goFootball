@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   },
   welcomeView: {
     marginHorizontal: scale(10),
+    marginTop: scale(250),
     backgroundColor: colors.marzipan,
     padding: scale(20),
     borderRadius: scale(20),

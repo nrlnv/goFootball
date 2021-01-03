@@ -36,34 +36,46 @@ const AddGameScreen = ({navigation}) => {
     _price,
     _phone,
   ) => {
-    var messageListRef = firebase.database().ref('games');
-    var newMessageRef = messageListRef.push();
-    newMessageRef
-      .set({
-        field: _field,
-        day: _day,
-        time: _time,
-        duration: _duration,
-        players: _players,
-        price: _price,
-        addedBy: user.email,
-        phone: _phone,
-        addedTime: Date.now(),
-      })
-      .then(() => {
-        alert('Матч создан!');
-        navigation.goBack();
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-    setField('');
-    setDay('');
-    setTime('');
-    setDuration('');
-    setPlayers('');
-    setPrice('');
-    setPhone('');
+
+    if (_field.length === 0 || !_field.trim() ||
+        _day.length === 0 || !_day.trim() ||
+        _time.length === 0 || !_time.trim() ||
+        _duration.length === 0 || !_duration.trim() ||
+        _players.length === 0 || !_players.trim() ||
+        _price.length === 0 || !_price.trim() ||
+        _phone.length === 0 || !_phone.trim()
+        ) {
+      alert('Заполните все поля')
+    } else {
+        var messageListRef = firebase.database().ref('games');
+        var newMessageRef = messageListRef.push();
+        newMessageRef
+          .set({
+            field: _field,
+            day: _day,
+            time: _time,
+            duration: _duration,
+            players: _players,
+            price: _price,
+            addedBy: user.email,
+            phone: _phone,
+            addedTime: Date.now(),
+          })
+          .then(() => {
+            alert('Матч создан!');
+            navigation.goBack();
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+        setField('');
+        setDay('');
+        setTime('');
+        setDuration('');
+        setPlayers('');
+        setPrice('');
+        setPhone('');
+      }
   };
 
   return (
