@@ -14,15 +14,15 @@ import {
 import {Form, Item, Input, Label} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment';
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
-import { set } from 'react-native-reanimated';
 
 const AddGameScreen = ({navigation}) => {
   const [field, setField] = useState('');
-  const [day, setDay] = useState('');
-  const [time, setTime] = useState('');
+  const [day, setDay] = useState(null);
+  const [time, setTime] = useState(null);
   const [duration, setDuration] = useState('');
   const [players, setPlayers] = useState('');
   const [price, setPrice] = useState('');
@@ -31,12 +31,12 @@ const AddGameScreen = ({navigation}) => {
   const [showTime, setShowTime] = useState(false);
 
   const handleDateConfirm = (date) => {
-    setDay(date.toLocaleDateString('en-US'));
+    setDay(date.getTime());
     setShowDay(false);
   };
 
   const handleTimeConfirm = (date) => {
-    setTime(date.toLocaleTimeString('en-GB').slice(0, -3));
+    setTime(date.getTime());
     setShowTime(false);
   };
 
@@ -61,8 +61,7 @@ const AddGameScreen = ({navigation}) => {
   ) => {
 
     if (_field.length === 0 || !_field.trim() ||
-        _day.length === 0 || !_day.trim() ||
-        _time.length === 0 || !_time.trim() ||
+        !_day || !_time ||
         _duration.length === 0 || !_duration.trim() ||
         _players.length === 0 || !_players.trim() ||
         _price.length === 0 || !_price.trim() ||
@@ -125,7 +124,7 @@ const AddGameScreen = ({navigation}) => {
               </Item>
               <Item style={{borderBottomColor: colors.cherry}}>
                 <TouchableOpacity onPress={() => setShowDay(true)} style={{marginTop: scale(35)}}>
-                  {day !== '' ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{day}</Text>) : (
+                  {day ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{moment(day).format('DD-MM-YY')}</Text>) : (
                   <Text style={{fontSize: scale(17), color: colors.cherry}}>День</Text>
                   )}
                 </TouchableOpacity>
@@ -147,7 +146,7 @@ const AddGameScreen = ({navigation}) => {
                   style={{color: colors.cherry}}
                 /> */}
                 <TouchableOpacity onPress={() => setShowTime(true)} style={{marginTop: scale(35)}}>
-                  {time !== '' ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{time}</Text>) : (
+                  {time ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{moment(time).format('HH:mm')}</Text>) : (
                   <Text style={{fontSize: scale(17), color: colors.cherry}}>Время</Text>
                   )}
                 </TouchableOpacity>

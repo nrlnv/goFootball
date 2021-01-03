@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
+import moment from 'moment';
 
 import {colors, scale} from '../constants/globalStyles';
 
@@ -13,9 +14,9 @@ const GameItem = ({item}) => (
     <View>
       <View style={styles.flexD}>
         <Icon name="calendar-today" size={16} color={colors.cherry} />
-        <Text style={styles.bodyText}>{item.day}</Text>
+        <Text style={styles.bodyText}>{moment(item.day).format('DD-MM-YY')}</Text>
         <Icon name="access-time" size={16} color={colors.cherry} />
-        <Text style={styles.bodyText}>{item.time}</Text>
+        <Text style={styles.bodyText}>{moment(item.time).format('HH:mm')}</Text>
         <Icon1 name="timer-sand" size={16} color={colors.cherry} />
         <Text style={styles.bodyText}>{item.duration}</Text>
       </View>
