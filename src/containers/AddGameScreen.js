@@ -9,12 +9,15 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  Text
 } from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
+import { set } from 'react-native-reanimated';
 
 const AddGameScreen = ({navigation}) => {
   const [field, setField] = useState('');
@@ -24,6 +27,26 @@ const AddGameScreen = ({navigation}) => {
   const [players, setPlayers] = useState('');
   const [price, setPrice] = useState('');
   const [phone, setPhone] = useState('');
+  const [showDay, setShowDay] = useState(false);
+  const [showTime, setShowTime] = useState(false);
+
+  const handleDateConfirm = (date) => {
+    setDay(date.toLocaleDateString('en-US'));
+    setShowDay(false);
+  };
+
+  const handleTimeConfirm = (date) => {
+    setTime(date.toLocaleTimeString('en-GB').slice(0, -3));
+    setShowTime(false);
+  };
+
+  const hideDayPicker = () => {
+    setShowDay(false);
+  }
+
+  const hideTimePicker = () => {
+    setShowTime(false);
+  }
 
   var user = firebase.auth().currentUser;
 
@@ -45,7 +68,7 @@ const AddGameScreen = ({navigation}) => {
         _price.length === 0 || !_price.trim() ||
         _phone.length === 0 || !_phone.trim()
         ) {
-      alert('Заполните все поля')
+      alert('Заполните все поля');
     } else {
         var messageListRef = firebase.database().ref('games');
         var newMessageRef = messageListRef.push();
@@ -100,19 +123,21 @@ const AddGameScreen = ({navigation}) => {
                   style={{color: colors.cherry}}
                 />
               </Item>
-              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-                <Label style={{color: colors.cherry}}>День</Label>
-                <Input
-                  value={day}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType='default'
-                  onChangeText={(x) => setDay(x)}
-                  style={{color: colors.cherry}}
+              <Item style={{borderBottomColor: colors.cherry}}>
+                <TouchableOpacity onPress={() => setShowDay(true)} style={{marginTop: scale(35)}}>
+                  {day !== '' ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{day}</Text>) : (
+                  <Text style={{fontSize: scale(17), color: colors.cherry}}>День</Text>
+                  )}
+                </TouchableOpacity>
+                <DateTimePickerModal
+                  isVisible={showDay}
+                  mode='date'
+                  onConfirm={handleDateConfirm}
+                  onCancel={hideDayPicker}
                 />
               </Item>
-              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-                <Label style={{color: colors.cherry}}>Время</Label>
+              <Item style={{borderBottomColor: colors.cherry}}>
+                {/* <Label style={{color: colors.cherry}}>Время</Label>
                 <Input
                   value={time}
                   autoCorrect={false}
@@ -120,6 +145,18 @@ const AddGameScreen = ({navigation}) => {
                   keyboardType='numbers-and-punctuation'
                   onChangeText={(x) => setTime(x)}
                   style={{color: colors.cherry}}
+                /> */}
+                <TouchableOpacity onPress={() => setShowTime(true)} style={{marginTop: scale(35)}}>
+                  {time !== '' ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{time}</Text>) : (
+                  <Text style={{fontSize: scale(17), color: colors.cherry}}>Время</Text>
+                  )}
+                </TouchableOpacity>
+                <DateTimePickerModal
+                  isVisible={showTime}
+                  mode='time'
+                  locale='en_GB'
+                  onConfirm={handleTimeConfirm}
+                  onCancel={hideTimePicker}
                 />
               </Item>
               <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
