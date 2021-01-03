@@ -106,7 +106,7 @@ const AddGameScreen = ({navigation}) => {
                   value={day}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType="email-address"
+                  keyboardType='default'
                   onChangeText={(x) => setDay(x)}
                   style={{color: colors.cherry}}
                 />
@@ -117,7 +117,7 @@ const AddGameScreen = ({navigation}) => {
                   value={time}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType="default"
+                  keyboardType='numbers-and-punctuation'
                   onChangeText={(x) => setTime(x)}
                   style={{color: colors.cherry}}
                 />
@@ -128,7 +128,7 @@ const AddGameScreen = ({navigation}) => {
                   value={duration}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType="default"
+                  keyboardType='numbers-and-punctuation'
                   onChangeText={(x) => setDuration(x)}
                   style={{color: colors.cherry}}
                 />
@@ -139,7 +139,7 @@ const AddGameScreen = ({navigation}) => {
                   value={players}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType="default"
+                  keyboardType='number-pad'
                   onChangeText={(x) => setPlayers(x)}
                   style={{color: colors.cherry}}
                 />
@@ -152,7 +152,7 @@ const AddGameScreen = ({navigation}) => {
                   value={price}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType="default"
+                  keyboardType='number-pad'
                   onChangeText={(x) => setPrice(x)}
                   style={{color: colors.cherry}}
                 />
@@ -163,7 +163,7 @@ const AddGameScreen = ({navigation}) => {
                   value={phone}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType="default"
+                  keyboardType='phone-pad'
                   onChangeText={(x) => setPhone(x)}
                   style={{color: colors.cherry}}
                 />
