@@ -143,18 +143,12 @@ const AddGameScreen = ({navigation}) => {
                   minimumDate={new Date()}
                   onConfirm={handleDateConfirm}
                   onCancel={hideDayPicker}
+                  confirmTextIOS='Подтвердить'
+                  cancelTextIOS='Отменить'
+                  headerTextIOS='Выберите день'
                 />
               </Item>
               <Item style={{borderBottomColor: colors.cherry}}>
-                {/* <Label style={{color: colors.cherry}}>Время</Label>
-                <Input
-                  value={time}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType='numbers-and-punctuation'
-                  onChangeText={(x) => setTime(x)}
-                  style={{color: colors.cherry}}
-                /> */}
                 <TouchableOpacity onPress={() => setShowTime(true)} style={{marginTop: scale(35)}}>
                   {time ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{moment(time).format('HH:mm')}</Text>) : (
                   <Text style={{fontSize: scale(17), color: colors.cherry}}>Время</Text>
@@ -166,6 +160,9 @@ const AddGameScreen = ({navigation}) => {
                   locale='en_GB'
                   onConfirm={handleTimeConfirm}
                   onCancel={hideTimePicker}
+                  confirmTextIOS='Подтвердить'
+                  cancelTextIOS='Отменить'
+                  headerTextIOS='Выберите время'
                 />
               </Item>
               <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
