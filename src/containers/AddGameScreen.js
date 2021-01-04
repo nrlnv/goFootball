@@ -26,7 +26,7 @@ const AddGameScreen = ({navigation}) => {
   const [duration, setDuration] = useState('');
   const [players, setPlayers] = useState('');
   const [price, setPrice] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState('+7');
   const [showDay, setShowDay] = useState(false);
   const [showTime, setShowTime] = useState(false);
 
@@ -46,6 +46,10 @@ const AddGameScreen = ({navigation}) => {
 
   const hideTimePicker = () => {
     setShowTime(false);
+  }
+
+  const isPhoneValid = (_phone) => {
+    return (new RegExp(/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/)).test(_phone.substring(2));
   }
 
   var user = firebase.auth().currentUser;
@@ -69,6 +73,7 @@ const AddGameScreen = ({navigation}) => {
         ) {
       alert('Заполните все поля');
     } else {
+      if (isPhoneValid(_phone)) {
         var messageListRef = firebase.database().ref('games');
         var newMessageRef = messageListRef.push();
         newMessageRef
@@ -97,7 +102,11 @@ const AddGameScreen = ({navigation}) => {
         setPlayers('');
         setPrice('');
         setPhone('');
+      } else {
+        alert('Введите корректный номер');
       }
+        
+    }
   };
 
   return (
