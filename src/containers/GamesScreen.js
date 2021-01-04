@@ -6,6 +6,8 @@ import * as firebase from 'firebase';
 import GameItem from '../components/GameItem';
 import {colors, scale} from '../constants/globalStyles';
 
+const Moment = require('moment');
+
 const MainScreen = ({navigation}) => {
   const [games, setGames] = useState(null);
 
@@ -14,8 +16,8 @@ const MainScreen = ({navigation}) => {
     gamesListRef.on('value', (dataSnapshot) => {
       if (dataSnapshot.val()) {
         let gamesList = Object.values(dataSnapshot.val());
-        setGames(gamesList);
-        console.log(gamesList);
+        const sortedArray  = gamesList.sort((a,b) => new Moment(a.day).format('YYYYMMDD') - new Moment(b.day).format('YYYYMMDD'));
+        setGames(sortedArray);
       }
     });
   }, []);

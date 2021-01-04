@@ -7,7 +7,8 @@ import moment from 'moment';
 import {colors, scale} from '../constants/globalStyles';
 
 const GameItem = ({item}) => (
-  <View style={styles.mainView}>
+    moment().isBefore(moment(item.day).add(6, 'hours')) ? (
+      <View style={styles.mainView}>
     <View style={styles.headerView}>
       <Text style={styles.headerText}>{item.field}</Text>
     </View>
@@ -32,6 +33,7 @@ const GameItem = ({item}) => (
       </View>
     </View>
   </View>
+    ) : null
 );
 
 const styles = StyleSheet.create({
