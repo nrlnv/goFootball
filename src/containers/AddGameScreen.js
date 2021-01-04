@@ -140,6 +140,7 @@ const AddGameScreen = ({navigation}) => {
                 <DateTimePickerModal
                   isVisible={showDay}
                   mode='date'
+                  minimumDate={new Date()}
                   onConfirm={handleDateConfirm}
                   onCancel={hideDayPicker}
                 />
