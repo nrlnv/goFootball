@@ -7,15 +7,16 @@ import moment from 'moment';
 import {colors, scale} from '../constants/globalStyles';
 
 const GameItem = ({item}) => (
-    moment().isBefore(moment(item.day).add(6, 'hours')) ? (
-      <View style={styles.mainView}>
+  <View style={styles.mainView}>
     <View style={styles.headerView}>
       <Text style={styles.headerText}>{item.field}</Text>
     </View>
     <View>
       <View style={styles.flexD}>
         <Icon name="calendar-today" size={16} color={colors.cherry} />
-        <Text style={styles.bodyText}>{moment(item.day).format('DD-MM-YY')}</Text>
+        <Text style={styles.bodyText}>
+          {moment(item.day).format('DD-MM-YY')}
+        </Text>
         <Icon name="access-time" size={16} color={colors.cherry} />
         <Text style={styles.bodyText}>{moment(item.time).format('HH:mm')}</Text>
         <Icon1 name="timer-sand" size={16} color={colors.cherry} />
@@ -33,7 +34,6 @@ const GameItem = ({item}) => (
       </View>
     </View>
   </View>
-    ) : null
 );
 
 const styles = StyleSheet.create({

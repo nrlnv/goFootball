@@ -1,14 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable no-alert */
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import * as firebase from 'firebase';
-import * as ImagePicker from 'react-native-image-picker';
+// import * as ImagePicker from 'react-native-image-picker';
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
@@ -31,7 +26,7 @@ const ProfileScreen = ({navigation}) => {
   //   });
   // };
 
-  var user = firebase.auth().currentUser;
+  // var user = firebase.auth().currentUser;
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authenticate) => {
@@ -60,8 +55,6 @@ const ProfileScreen = ({navigation}) => {
         alert(error.message);
       });
   };
-
-  const changePassword = () => {};
 
   // const saveSettings = () => {
   //   // Create the file metadata

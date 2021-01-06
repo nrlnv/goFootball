@@ -1,10 +1,10 @@
+/* eslint-disable no-alert */
 import React, {useState} from 'react';
 import * as firebase from 'firebase';
 import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  View,
   SafeAreaView,
 } from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';

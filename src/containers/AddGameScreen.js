@@ -1,7 +1,7 @@
+/* eslint-disable no-alert */
 import React, {useState} from 'react';
 import * as firebase from 'firebase';
 import {
-  View,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
@@ -9,11 +9,11 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
-  Text
+  Text,
 } from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 import Button from '../components/Button';
@@ -42,15 +42,18 @@ const AddGameScreen = ({navigation}) => {
 
   const hideDayPicker = () => {
     setShowDay(false);
-  }
+  };
 
   const hideTimePicker = () => {
     setShowTime(false);
-  }
+  };
 
   const isPhoneValid = (_phone) => {
-    return (new RegExp(/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/)).test(_phone.substring(2));
-  }
+    return new RegExp(
+      // eslint-disable-next-line no-useless-escape
+      /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/,
+    ).test(_phone.substring(2));
+  };
 
   var user = firebase.auth().currentUser;
 
@@ -63,14 +66,20 @@ const AddGameScreen = ({navigation}) => {
     _price,
     _phone,
   ) => {
-
-    if (_field.length === 0 || !_field.trim() ||
-        !_day || !_time ||
-        _duration.length === 0 || !_duration.trim() ||
-        _players.length === 0 || !_players.trim() ||
-        _price.length === 0 || !_price.trim() ||
-        _phone.length === 0 || !_phone.trim()
-        ) {
+    if (
+      _field.length === 0 ||
+      !_field.trim() ||
+      !_day ||
+      !_time ||
+      _duration.length === 0 ||
+      !_duration.trim() ||
+      _players.length === 0 ||
+      !_players.trim() ||
+      _price.length === 0 ||
+      !_price.trim() ||
+      _phone.length === 0 ||
+      !_phone.trim()
+    ) {
       alert('Заполните все поля');
     } else {
       if (isPhoneValid(_phone)) {
@@ -105,7 +114,6 @@ const AddGameScreen = ({navigation}) => {
       } else {
         alert('Введите корректный номер');
       }
-        
     }
   };
 
@@ -132,37 +140,53 @@ const AddGameScreen = ({navigation}) => {
                 />
               </Item>
               <Item style={{borderBottomColor: colors.cherry}}>
-                <TouchableOpacity onPress={() => setShowDay(true)} style={{marginTop: scale(35)}}>
-                  {day ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{moment(day).format('DD-MM-YY')}</Text>) : (
-                  <Text style={{fontSize: scale(17), color: colors.cherry}}>День</Text>
+                <TouchableOpacity
+                  onPress={() => setShowDay(true)}
+                  style={{marginTop: scale(35)}}>
+                  {day ? (
+                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
+                      {moment(day).format('DD-MM-YY')}
+                    </Text>
+                  ) : (
+                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
+                      День
+                    </Text>
                   )}
                 </TouchableOpacity>
                 <DateTimePickerModal
                   isVisible={showDay}
-                  mode='date'
+                  mode="date"
                   minimumDate={new Date()}
                   onConfirm={handleDateConfirm}
                   onCancel={hideDayPicker}
-                  confirmTextIOS='Подтвердить'
-                  cancelTextIOS='Отменить'
-                  headerTextIOS='Выберите день'
+                  confirmTextIOS="Подтвердить"
+                  cancelTextIOS="Отменить"
+                  headerTextIOS="Выберите день"
                 />
               </Item>
               <Item style={{borderBottomColor: colors.cherry}}>
-                <TouchableOpacity onPress={() => setShowTime(true)} style={{marginTop: scale(35)}}>
-                  {time ? (<Text style={{fontSize: scale(17), color: colors.cherry}}>{moment(time).format('HH:mm')}</Text>) : (
-                  <Text style={{fontSize: scale(17), color: colors.cherry}}>Время</Text>
+                <TouchableOpacity
+                  onPress={() => setShowTime(true)}
+                  style={{marginTop: scale(35)}}>
+                  {time ? (
+                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
+                      {moment(time).format('HH:mm')}
+                    </Text>
+                  ) : (
+                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
+                      Время
+                    </Text>
                   )}
                 </TouchableOpacity>
                 <DateTimePickerModal
                   isVisible={showTime}
-                  mode='time'
-                  locale='en_GB'
+                  mode="time"
+                  locale="en_GB"
                   onConfirm={handleTimeConfirm}
                   onCancel={hideTimePicker}
-                  confirmTextIOS='Подтвердить'
-                  cancelTextIOS='Отменить'
-                  headerTextIOS='Выберите время'
+                  confirmTextIOS="Подтвердить"
+                  cancelTextIOS="Отменить"
+                  headerTextIOS="Выберите время"
                 />
               </Item>
               <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
@@ -171,7 +195,7 @@ const AddGameScreen = ({navigation}) => {
                   value={duration}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType='numbers-and-punctuation'
+                  keyboardType="numbers-and-punctuation"
                   onChangeText={(x) => setDuration(x)}
                   style={{color: colors.cherry}}
                 />
@@ -182,7 +206,7 @@ const AddGameScreen = ({navigation}) => {
                   value={players}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType='number-pad'
+                  keyboardType="number-pad"
                   onChangeText={(x) => setPlayers(x)}
                   style={{color: colors.cherry}}
                 />
@@ -195,7 +219,7 @@ const AddGameScreen = ({navigation}) => {
                   value={price}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType='number-pad'
+                  keyboardType="number-pad"
                   onChangeText={(x) => setPrice(x)}
                   style={{color: colors.cherry}}
                 />
@@ -206,7 +230,7 @@ const AddGameScreen = ({navigation}) => {
                   value={phone}
                   autoCorrect={false}
                   autoCapitalize="none"
-                  keyboardType='phone-pad'
+                  keyboardType="phone-pad"
                   onChangeText={(x) => setPhone(x)}
                   style={{color: colors.cherry}}
                 />

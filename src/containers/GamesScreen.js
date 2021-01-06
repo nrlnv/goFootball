@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, StyleSheet, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import * as firebase from 'firebase';
 
 import GameItem from '../components/GameItem';
+import Header from '../components/Header';
 import {colors, scale} from '../constants/globalStyles';
-
-const Moment = require('moment');
 
 const MainScreen = ({navigation}) => {
   const [games, setGames] = useState(null);
@@ -15,9 +20,15 @@ const MainScreen = ({navigation}) => {
     var gamesListRef = firebase.database().ref('games');
     gamesListRef.on('value', (dataSnapshot) => {
       if (dataSnapshot.val()) {
-        let gamesList = Object.values(dataSnapshot.val());
-        const sortedArray  = gamesList.sort((a,b) => new Moment(a.day).format('YYYYMMDD') - new Moment(b.day).format('YYYYMMDD'));
-        setGames(sortedArray);
+        const gamesList = Object.values(dataSnapshot.val());
+        gamesList
+          .sort(function compare(a, b) {
+            var dateA = new Date(a.day);
+            var dateB = new Date(b.day);
+            return dateA - dateB;
+          })
+          .reverse();
+        setGames(gamesList);
       }
     });
   }, []);
@@ -29,23 +40,21 @@ const MainScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <Text style={styles.gamesText}>МАТЧИ</Text>
+        <Header text="МАТЧИ" />
         {games ? (
-            <FlatList
-              data={games}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => item.key}
-            />
+          <FlatList
+            data={games}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.addedTime.toString()}
+          />
         ) : (
-            <ActivityIndicator size="large" color={colors.marzipan} />
+          <ActivityIndicator size="large" color={colors.marzipan} />
         )}
         <TouchableOpacity
-              style={styles.addGameView}
-              onPress={() => navigation.navigate('AddGameScreen')}>
-              <Icon name="plus" color={colors.mulled} size={30} />
-            </TouchableOpacity>
-        
-        
+          style={styles.addGameView}
+          onPress={() => navigation.navigate('AddGameScreen')}>
+          <Icon name="plus" color={colors.mulled} size={30} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -59,8 +68,9 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: colors.cherry,
     flex: 1,
-    borderBottomLeftRadius: scale(50),
-    borderBottomRightRadius: scale(50),
+    borderBottomLeftRadius: scale(40),
+    borderBottomRightRadius: scale(40),
+    paddingBottom: scale(10),
   },
   addGameView: {
     position: 'absolute',
