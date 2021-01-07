@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import MainTabs from '../routers/MainTabs';
 import SignInScreen from '../containers/SignInScreen';
@@ -12,7 +11,7 @@ import AddGameScreen from '../containers/AddGameScreen';
 import ForgotPasswordScreen from '../containers/ForgotPasswordScreen';
 import ChangePasswordScreen from '../containers/ChangePasswordScreen';
 
-import {colors, scale} from '../constants/globalStyles';
+import {colors} from '../constants/globalStyles';
 
 const Stack = createStackNavigator();
 
