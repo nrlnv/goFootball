@@ -5,10 +5,11 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Keyboard,
+  View,
   TouchableWithoutFeedback,
 } from 'react-native';
 import * as firebase from 'firebase';
-import {Form, Item, Input, Label} from 'native-base';
+// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
 import BackButton from '../components/BackButton';
@@ -47,8 +48,8 @@ const SignUpScreen = ({navigation}) => {
         <SafeAreaView>
           <BackButton />
           <Logo />
-          <Form style={styles.form}>
-            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+          <View style={styles.form}>
+            {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
               <Label style={{color: colors.cherry}}>Почта</Label>
               <Input
                 autoCorrect={false}
@@ -78,12 +79,12 @@ const SignUpScreen = ({navigation}) => {
                 onChangeText={(p) => setPassword(p)}
                 style={{color: colors.cherry}}
               />
-            </Item>
+            </Item> */}
             <Button
               text="Зарегистрироваться"
               onPress={() => signUpUser(email, name, password)}
             />
-          </Form>
+          </View>
         </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

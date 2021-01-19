@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     fontSize: scale(20),
     fontWeight: '600',
     color: colors.marzipan,
-    marginTop: scale(20),
+    // marginTop: scale(20),
     marginLeft: scale(20),
   },
 });

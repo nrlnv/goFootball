@@ -6,8 +6,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   SafeAreaView,
+  View,
 } from 'react-native';
-import {Form, Item, Input, Label} from 'native-base';
+// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
 import BackButton from '../components/BackButton';
@@ -35,8 +36,8 @@ const ChangePasswordScreen = ({navigation}) => {
       <SafeAreaView style={styles.container}>
         <Logo />
         <BackButton />
-        <Form style={styles.form}>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+        <View style={styles.form}>
+          {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>Новый пароль</Label>
             <Input
               secureTextEntry={true}
@@ -46,12 +47,12 @@ const ChangePasswordScreen = ({navigation}) => {
               onChangeText={(x) => setPassword(x)}
               style={{color: colors.cherry}}
             />
-          </Item>
+          </Item> */}
           <Button
             text="Сменить пароль"
             onPress={() => changePassword(password)}
           />
-        </Form>
+        </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

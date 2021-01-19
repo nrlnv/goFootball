@@ -6,10 +6,11 @@ import moment from 'moment';
 
 import {colors, scale} from '../constants/globalStyles';
 
-const GameItem = ({item}) => {
+const GameItem = ({item, city}) => {
   const currentDate = new Date();
 
-  return currentDate.getTime() < moment(item.day).add(1, 'hours') ? (
+  return currentDate.getTime() < moment(item.day).add(1, 'hours') &&
+    city === item.city ? (
     <View style={styles.mainView}>
       <View style={styles.headerView}>
         <Text style={styles.headerText}>{item.field}</Text>

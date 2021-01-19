@@ -11,10 +11,13 @@ import * as firebase from 'firebase';
 
 import GameItem from '../components/GameItem';
 import Header from '../components/Header';
+import CityPicker from '../components/CityPicker';
 import {colors, scale} from '../constants/globalStyles';
 
 const MainScreen = ({navigation}) => {
   const [games, setGames] = useState(null);
+  const [city, setCity] = useState('Орал');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     var gamesListRef = firebase.database().ref('games');
@@ -34,13 +37,24 @@ const MainScreen = ({navigation}) => {
   }, []);
 
   const renderItem = ({item}) => {
-    return <GameItem item={item} />;
+    return <GameItem item={item} city={city} />;
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <Header text="МАТЧИ" />
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Header text="МАТЧИ" />
+          <CityPicker
+            city={city}
+            onPress={() => setShowModal(true)}
+            showModal={showModal}
+            onBackdropPress={() => setShowModal(false)}
+            onValueChange={(value) => setCity(value)}
+            onPressButton={() => setShowModal(false)}
+          />
+        </View>
+
         {games ? (
           <FlatList
             data={games}

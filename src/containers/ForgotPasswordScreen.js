@@ -4,10 +4,11 @@ import {
   StyleSheet,
   Keyboard,
   TouchableWithoutFeedback,
+  View,
   SafeAreaView,
 } from 'react-native';
 import * as firebase from 'firebase';
-import {Form, Item, Input, Label} from 'native-base';
+// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
 import BackButton from '../components/BackButton';
@@ -37,8 +38,8 @@ const ForgotPasswordScreen = ({navigation}) => {
       <SafeAreaView style={styles.container}>
         <Logo />
         <BackButton />
-        <Form style={styles.form}>
-          <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+        <View style={styles.form}>
+          {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
             <Label style={{color: colors.cherry}}>Почта</Label>
             <Input
               autoCorrect={false}
@@ -47,12 +48,12 @@ const ForgotPasswordScreen = ({navigation}) => {
               onChangeText={(e) => setEmail(e)}
               style={{color: colors.cherry}}
             />
-          </Item>
+          </Item> */}
           <Button
             text="Восстановить пароль"
             onPress={() => resetPassword(email)}
           />
-        </Form>
+        </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

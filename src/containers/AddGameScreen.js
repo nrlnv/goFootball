@@ -10,8 +10,9 @@ import {
   TouchableOpacity,
   ScrollView,
   Text,
+  View,
 } from 'react-native';
-import {Form, Item, Input, Label} from 'native-base';
+// import {Form, Item, Input, Label} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
@@ -127,8 +128,8 @@ const AddGameScreen = ({navigation}) => {
               onPress={() => navigation.goBack()}>
               <Icon name="arrow-back-ios" size={30} color={colors.marzipan} />
             </TouchableOpacity>
-            <Form style={styles.form}>
-              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+            <View style={styles.form}>
+              {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
                 <Label style={{color: colors.cherry}}>Место</Label>
                 <Input
                   value={field}
@@ -234,14 +235,14 @@ const AddGameScreen = ({navigation}) => {
                   onChangeText={(x) => setPhone(x)}
                   style={{color: colors.cherry}}
                 />
-              </Item>
+              </Item> */}
               <Button
                 text="Создать матч"
                 onPress={() =>
                   addGame(field, day, time, duration, players, price, phone)
                 }
               />
-            </Form>
+            </View>
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

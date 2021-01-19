@@ -11,15 +11,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import * as firebase from 'firebase';
-import {Form, Item, Input, Label} from 'native-base';
+import {FloatingLabelInput} from 'react-native-floating-label-input';
+// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
 import Logo from '../components/Logo';
+import Input from '../components/Input';
 import {colors, scale} from '../constants/globalStyles';
 
 const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [show, setShow] = useState(false);
 
   const signInUser = (e, p) => {
     firebase
@@ -38,8 +41,38 @@ const SignInScreen = ({navigation}) => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <SafeAreaView>
           <Logo />
-          <Form style={styles.form}>
-            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
+          <View style={styles.form}>
+            <Input
+              label="email"
+              value={email}
+              onChangeText={(value) => setEmail(value)}
+            />
+            <Input
+              label="password"
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+              isPassword
+              togglePassword={show}
+            />
+            {/* <FloatingLabelInput
+        label={'email'}
+        // isPassword
+        // togglePassword={show}
+        value={email}
+        onChangeText={(value) => setEmail(value)}
+        // customShowPasswordComponent={<Text>Show</Text>}
+        // customHidePasswordComponent={<Text>Hide</Text>}
+      />
+      <FloatingLabelInput
+        label={'password'}
+        isPassword
+        togglePassword={show}
+        value={password}
+        onChangeText={(value) => setPassword(value)}
+        customShowPasswordComponent={<Text>Show</Text>}
+        customHidePasswordComponent={<Text>Hide</Text>}
+      /> */}
+            {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
               <Label style={{color: colors.cherry}}>Почта</Label>
               <Input
                 autoCorrect={false}
@@ -59,9 +92,9 @@ const SignInScreen = ({navigation}) => {
                 onChangeText={(p) => setPassword(p)}
                 style={{color: colors.cherry}}
               />
-            </Item>
+            </Item> */}
             <Button text="Войти" onPress={() => signInUser(email, password)} />
-          </Form>
+          </View>
           <View style={styles.footer}>
             <TouchableOpacity
               style={styles.footerView}
