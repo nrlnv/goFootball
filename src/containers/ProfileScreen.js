@@ -172,8 +172,8 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: colors.cherry,
     flex: 1,
-    borderBottomLeftRadius: scale(50),
-    borderBottomRightRadius: scale(50),
+    borderBottomLeftRadius: scale(40),
+    borderBottomRightRadius: scale(40),
   },
   userDetails: {
     backgroundColor: colors.marzipan,

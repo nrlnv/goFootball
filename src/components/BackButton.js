@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: scale(20),
-    // marginTop: scale(40),
+    marginTop: scale(20),
   },
 });
 

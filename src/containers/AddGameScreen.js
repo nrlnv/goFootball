@@ -11,6 +11,7 @@ import {
   ScrollView,
   Text,
   View,
+  Platform,
 } from 'react-native';
 // import {Form, Item, Input, Label} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -131,7 +132,9 @@ const AddGameScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView behavior="position" enabled>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+        enabled>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <ScrollView>
             <TouchableOpacity
@@ -220,11 +223,13 @@ const AddGameScreen = ({navigation}) => {
                 label="Контактный номер"
                 value={phone}
                 onChangeText={(value) => setPhone(value)}
+                keyboardType="numeric"
               />
               <Input
                 label="Комментарии к матчу"
                 value={comment}
                 onChangeText={(value) => setComment(value)}
+                multiline={true}
               />
               <Button
                 text="Создать матч"

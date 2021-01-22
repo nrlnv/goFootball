@@ -27,7 +27,7 @@ const FieldItem = ({item, city}) => {
           <Text style={styles.bodyText}>{item.count}</Text>
           <Icon1 name="soccer-field" size={scale(16)} color={colors.cherry} />
           <Text style={styles.bodyText}>{item.field}</Text>
-          <Icon name="attach-money" size={scale(16)} color={colors.cherry} />
+          <Icon1 name="currency-kzt" size={scale(16)} color={colors.cherry} />
           <Text style={styles.bodyText}>{item.price} тг в час</Text>
         </View>
       </View>

@@ -11,6 +11,7 @@ const Input = ({
   value,
   keyboardType,
   onChangeText,
+  multiline,
 }) => (
   <View style={styles.inputContainer}>
     <FloatingLabelInput
@@ -21,10 +22,8 @@ const Input = ({
       togglePassword={togglePassword}
       value={value}
       keyboardType={keyboardType}
-      multiline={true}
+      multiline={multiline}
       onChangeText={onChangeText}
-      customShowPasswordComponent={<Text style={styles.showText}>Show</Text>}
-      customHidePasswordComponent={<Text>Hide</Text>}
       containerStyles={styles.containerStyles}
       labelStyles={{
         color: colors.marzipan,

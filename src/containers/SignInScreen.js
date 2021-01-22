@@ -11,6 +11,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import * as firebase from 'firebase';
+import {FloatingLabelInput} from 'react-native-floating-label-input';
+
 
 import Button from '../components/Button';
 import Logo from '../components/Logo';
