@@ -31,7 +31,7 @@ const GameItem = ({item, city}) => {
         <View style={styles.flexD}>
           <Icon name="people" size={16} color={colors.cherry} />
           <Text style={styles.bodyText}>{item.players} игроков</Text>
-          <Icon name="attach-money" size={16} color={colors.cherry} />
+          <Icon1 name="currency-kzt" size={16} color={colors.cherry} />
           <Text style={styles.bodyText}>{item.price} тг в час</Text>
         </View>
         <View style={styles.flexD}>
