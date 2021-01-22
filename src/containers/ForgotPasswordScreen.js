@@ -8,9 +8,9 @@ import {
   SafeAreaView,
 } from 'react-native';
 import * as firebase from 'firebase';
-// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
+import Input from '../components/Input';
 import BackButton from '../components/BackButton';
 
 import Logo from '../components/Logo';
@@ -39,16 +39,11 @@ const ForgotPasswordScreen = ({navigation}) => {
         <Logo />
         <BackButton />
         <View style={styles.form}>
-          {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-            <Label style={{color: colors.cherry}}>Почта</Label>
-            <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(e) => setEmail(e)}
-              style={{color: colors.cherry}}
-            />
-          </Item> */}
+          <Input
+            label="Почта"
+            value={email}
+            onChangeText={(value) => setEmail(value)}
+          />
           <Button
             text="Восстановить пароль"
             onPress={() => resetPassword(email)}

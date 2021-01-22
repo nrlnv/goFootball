@@ -38,6 +38,12 @@ const GameItem = ({item, city}) => {
           <Icon name="phone" size={16} color={colors.cherry} />
           <Text style={styles.bodyText}>{item.phone}</Text>
         </View>
+        {!item.comment || item.comment === '' ? null : (
+          <View style={styles.flexD}>
+            <Icon1 name="comment" size={16} color={colors.cherry} />
+            <Text style={styles.bodyText}>{item.comment}</Text>
+          </View>
+        )}
       </View>
     </View>
   ) : null;

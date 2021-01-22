@@ -11,8 +11,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import * as firebase from 'firebase';
-import {FloatingLabelInput} from 'react-native-floating-label-input';
-// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
 import Logo from '../components/Logo';
@@ -43,56 +41,17 @@ const SignInScreen = ({navigation}) => {
           <Logo />
           <View style={styles.form}>
             <Input
-              label="email"
+              label="Почта"
               value={email}
               onChangeText={(value) => setEmail(value)}
             />
             <Input
-              label="password"
+              label="Пароль"
               value={password}
               onChangeText={(value) => setPassword(value)}
               isPassword
               togglePassword={show}
             />
-            {/* <FloatingLabelInput
-        label={'email'}
-        // isPassword
-        // togglePassword={show}
-        value={email}
-        onChangeText={(value) => setEmail(value)}
-        // customShowPasswordComponent={<Text>Show</Text>}
-        // customHidePasswordComponent={<Text>Hide</Text>}
-      />
-      <FloatingLabelInput
-        label={'password'}
-        isPassword
-        togglePassword={show}
-        value={password}
-        onChangeText={(value) => setPassword(value)}
-        customShowPasswordComponent={<Text>Show</Text>}
-        customHidePasswordComponent={<Text>Hide</Text>}
-      /> */}
-            {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-              <Label style={{color: colors.cherry}}>Почта</Label>
-              <Input
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                onChangeText={(e) => setEmail(e)}
-                style={{color: colors.cherry}}
-              />
-            </Item>
-            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-              <Label style={{color: colors.cherry}}>Пароль</Label>
-              <Input
-                secureTextEntry={true}
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="default"
-                onChangeText={(p) => setPassword(p)}
-                style={{color: colors.cherry}}
-              />
-            </Item> */}
             <Button text="Войти" onPress={() => signInUser(email, password)} />
           </View>
           <View style={styles.footer}>

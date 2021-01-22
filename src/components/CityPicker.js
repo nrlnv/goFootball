@@ -15,11 +15,22 @@ const CityPicker = ({
   onBackdropPress,
   onValueChange,
   onPressButton,
+  addGame,
 }) => (
   <View style={styles.pickerContainer}>
     <TouchableOpacity onPress={onPress} style={{flexDirection: 'row'}}>
-      <Text style={styles.cityText}>{city}</Text>
-      <Icon name="keyboard-arrow-down" color={colors.marzipan} size={24} />
+      <Text
+        style={[
+          styles.cityText,
+          {color: addGame ? colors.cherry : colors.marzipan},
+        ]}>
+        {city}
+      </Text>
+      <Icon
+        name="keyboard-arrow-down"
+        color={addGame ? colors.cherry : colors.marzipan}
+        size={24}
+      />
     </TouchableOpacity>
     <Modal isVisible={showModal} onBackdropPress={onBackdropPress}>
       <View style={styles.modalView}>

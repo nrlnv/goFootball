@@ -9,9 +9,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import * as firebase from 'firebase';
-// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
+import Input from '../components/Input';
 import BackButton from '../components/BackButton';
 import Logo from '../components/Logo';
 import {colors, scale} from '../constants/globalStyles';
@@ -20,6 +20,7 @@ const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [show, setShow] = useState(false);
 
   const signUpUser = (_email, _name, _password) => {
     firebase
@@ -49,37 +50,23 @@ const SignUpScreen = ({navigation}) => {
           <BackButton />
           <Logo />
           <View style={styles.form}>
-            {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-              <Label style={{color: colors.cherry}}>Почта</Label>
-              <Input
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                onChangeText={(e) => setEmail(e)}
-                style={{color: colors.cherry}}
-              />
-            </Item>
-            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-              <Label style={{color: colors.cherry}}>Имя</Label>
-              <Input
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="name-phone-pad"
-                onChangeText={(n) => setName(n)}
-                style={{color: colors.cherry}}
-              />
-            </Item>
-            <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-              <Label style={{color: colors.cherry}}>Пароль</Label>
-              <Input
-                secureTextEntry={true}
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                onChangeText={(p) => setPassword(p)}
-                style={{color: colors.cherry}}
-              />
-            </Item> */}
+            <Input
+              label="Почта"
+              value={email}
+              onChangeText={(value) => setEmail(value)}
+            />
+            <Input
+              label="Имя"
+              value={name}
+              onChangeText={(value) => setName(value)}
+            />
+            <Input
+              label="Пароль"
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+              isPassword
+              togglePassword={show}
+            />
             <Button
               text="Зарегистрироваться"
               onPress={() => signUpUser(email, name, password)}

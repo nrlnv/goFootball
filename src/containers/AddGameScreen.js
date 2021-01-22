@@ -18,6 +18,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 import Button from '../components/Button';
+import Input from '../components/Input';
+import CityPicker from '../components/CityPicker';
 import {colors, scale} from '../constants/globalStyles';
 
 const AddGameScreen = ({navigation}) => {
@@ -30,6 +32,9 @@ const AddGameScreen = ({navigation}) => {
   const [phone, setPhone] = useState('+7');
   const [showDay, setShowDay] = useState(false);
   const [showTime, setShowTime] = useState(false);
+  const [city, setCity] = useState('Орал');
+  const [showModal, setShowModal] = useState(false);
+  const [comment, setComment] = useState('');
 
   const handleDateConfirm = (date) => {
     setDay(date.getTime());
@@ -59,6 +64,7 @@ const AddGameScreen = ({navigation}) => {
   var user = firebase.auth().currentUser;
 
   const addGame = (
+    _city,
     _field,
     _day,
     _time,
@@ -66,8 +72,10 @@ const AddGameScreen = ({navigation}) => {
     _players,
     _price,
     _phone,
+    _comment,
   ) => {
     if (
+      _city === '' ||
       _field.length === 0 ||
       !_field.trim() ||
       !_day ||
@@ -88,6 +96,7 @@ const AddGameScreen = ({navigation}) => {
         var newMessageRef = messageListRef.push();
         newMessageRef
           .set({
+            city: _city,
             field: _field,
             day: _day,
             time: _time,
@@ -96,6 +105,7 @@ const AddGameScreen = ({navigation}) => {
             price: _price,
             addedBy: user.email,
             phone: _phone,
+            comment: _comment,
             addedTime: Date.now(),
           })
           .then(() => {
@@ -112,6 +122,7 @@ const AddGameScreen = ({navigation}) => {
         setPlayers('');
         setPrice('');
         setPhone('');
+        setComment('');
       } else {
         alert('Введите корректный номер');
       }
@@ -129,117 +140,106 @@ const AddGameScreen = ({navigation}) => {
               <Icon name="arrow-back-ios" size={30} color={colors.marzipan} />
             </TouchableOpacity>
             <View style={styles.form}>
-              {/* <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-                <Label style={{color: colors.cherry}}>Место</Label>
-                <Input
-                  value={field}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="email-address"
-                  onChangeText={(x) => setField(x)}
-                  style={{color: colors.cherry}}
+              <View style={styles.datepickerView}>
+                <CityPicker
+                  city={city}
+                  onPress={() => setShowModal(true)}
+                  showModal={showModal}
+                  onBackdropPress={() => setShowModal(false)}
+                  onValueChange={(value) => setCity(value)}
+                  onPressButton={() => setShowModal(false)}
+                  addGame={true}
                 />
-              </Item>
-              <Item style={{borderBottomColor: colors.cherry}}>
-                <TouchableOpacity
-                  onPress={() => setShowDay(true)}
-                  style={{marginTop: scale(35)}}>
-                  {day ? (
-                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
-                      {moment(day).format('DD-MM-YY')}
-                    </Text>
-                  ) : (
-                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
-                      День
-                    </Text>
-                  )}
-                </TouchableOpacity>
-                <DateTimePickerModal
-                  isVisible={showDay}
-                  mode="date"
-                  minimumDate={new Date()}
-                  onConfirm={handleDateConfirm}
-                  onCancel={hideDayPicker}
-                  confirmTextIOS="Подтвердить"
-                  cancelTextIOS="Отменить"
-                  headerTextIOS="Выберите день"
-                />
-              </Item>
-              <Item style={{borderBottomColor: colors.cherry}}>
-                <TouchableOpacity
-                  onPress={() => setShowTime(true)}
-                  style={{marginTop: scale(35)}}>
-                  {time ? (
-                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
-                      {moment(time).format('HH:mm')}
-                    </Text>
-                  ) : (
-                    <Text style={{fontSize: scale(17), color: colors.cherry}}>
-                      Время
-                    </Text>
-                  )}
-                </TouchableOpacity>
-                <DateTimePickerModal
-                  isVisible={showTime}
-                  mode="time"
-                  locale="en_GB"
-                  onConfirm={handleTimeConfirm}
-                  onCancel={hideTimePicker}
-                  confirmTextIOS="Подтвердить"
-                  cancelTextIOS="Отменить"
-                  headerTextIOS="Выберите время"
-                />
-              </Item>
-              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-                <Label style={{color: colors.cherry}}>Длительность</Label>
-                <Input
-                  value={duration}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="numbers-and-punctuation"
-                  onChangeText={(x) => setDuration(x)}
-                  style={{color: colors.cherry}}
-                />
-              </Item>
-              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-                <Label style={{color: colors.cherry}}>Количество игроков</Label>
-                <Input
-                  value={players}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="number-pad"
-                  onChangeText={(x) => setPlayers(x)}
-                  style={{color: colors.cherry}}
-                />
-              </Item>
-              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-                <Label style={{color: colors.cherry}}>
-                  Цена площадки за час
-                </Label>
-                <Input
-                  value={price}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="number-pad"
-                  onChangeText={(x) => setPrice(x)}
-                  style={{color: colors.cherry}}
-                />
-              </Item>
-              <Item floatingLabel style={{borderBottomColor: colors.cherry}}>
-                <Label style={{color: colors.cherry}}>Контактный номер</Label>
-                <Input
-                  value={phone}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="phone-pad"
-                  onChangeText={(x) => setPhone(x)}
-                  style={{color: colors.cherry}}
-                />
-              </Item> */}
+              </View>
+              <Input
+                label="Место"
+                value={field}
+                onChangeText={(value) => setField(value)}
+              />
+              <TouchableOpacity
+                onPress={() => setShowDay(true)}
+                style={[styles.datepickerView, {marginBottom: scale(5)}]}>
+                {day ? (
+                  <Text style={styles.datepickerText}>
+                    {moment(day).format('DD-MM-YY')}
+                  </Text>
+                ) : (
+                  <Text style={styles.datepickerText}>День</Text>
+                )}
+              </TouchableOpacity>
+              <DateTimePickerModal
+                isVisible={showDay}
+                mode="date"
+                minimumDate={new Date()}
+                onConfirm={handleDateConfirm}
+                onCancel={hideDayPicker}
+                confirmTextIOS="Подтвердить"
+                cancelTextIOS="Отменить"
+                headerTextIOS="Выберите день"
+              />
+              <TouchableOpacity
+                onPress={() => setShowTime(true)}
+                style={styles.datepickerView}>
+                {time ? (
+                  <Text style={styles.datepickerText}>
+                    {moment(time).format('HH:mm')}
+                  </Text>
+                ) : (
+                  <Text style={styles.datepickerText}>Время</Text>
+                )}
+              </TouchableOpacity>
+              <DateTimePickerModal
+                isVisible={showTime}
+                mode="time"
+                locale="en_GB"
+                onConfirm={handleTimeConfirm}
+                onCancel={hideTimePicker}
+                confirmTextIOS="Подтвердить"
+                cancelTextIOS="Отменить"
+                headerTextIOS="Выберите время"
+              />
+              <Input
+                label="Длительность"
+                value={duration}
+                onChangeText={(value) => setDuration(value)}
+                keyboardType="numeric"
+              />
+              <Input
+                label="Количество игроков"
+                value={players}
+                onChangeText={(value) => setPlayers(value)}
+                keyboardType="numeric"
+              />
+              <Input
+                label="Цена площадки за час"
+                value={price}
+                onChangeText={(value) => setPrice(value)}
+                keyboardType="numeric"
+              />
+              <Input
+                label="Контактный номер"
+                value={phone}
+                onChangeText={(value) => setPhone(value)}
+              />
+              <Input
+                label="Комментарии к матчу"
+                value={comment}
+                onChangeText={(value) => setComment(value)}
+              />
               <Button
                 text="Создать матч"
                 onPress={() =>
-                  addGame(field, day, time, duration, players, price, phone)
+                  addGame(
+                    city,
+                    field,
+                    day,
+                    time,
+                    duration,
+                    players,
+                    price,
+                    phone,
+                    comment,
+                  )
                 }
               />
             </View>
@@ -281,6 +281,17 @@ const styles = StyleSheet.create({
     marginLeft: scale(20),
     marginTop: scale(20),
     marginBottom: -scale(50),
+  },
+  datepickerView: {
+    borderColor: colors.cherry,
+    borderWidth: scale(2),
+    padding: scale(10),
+    borderRadius: scale(10),
+  },
+  datepickerText: {
+    fontSize: scale(17),
+    color: colors.cherry,
+    marginLeft: scale(5),
   },
 });
 
