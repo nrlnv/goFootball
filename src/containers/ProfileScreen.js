@@ -1,10 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-alert */
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-// import * as firebase from 'firebase';
+import {View, StyleSheet, Text, Image} from 'react-native';
 import auth from '@react-native-firebase/auth';
-// import * as ImagePicker from 'react-native-image-picker';
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
@@ -12,38 +10,22 @@ import {colors, scale} from '../constants/globalStyles';
 const ProfileScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [photo, setPhoto] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
 
-  // const handleChoosePhoto = () => {
-  //   const options = {
-  //     noData: true,
-  //   };
-  //   ImagePicker.launchImageLibrary(options, (response) => {
-  //     if (response.uri) {
-  //       setPhoto(response);
-  //       console.log('image: ', response);
-  //     }
-  //   });
-  // };
-
-  // var user = firebase.auth().currentUser;
-
   useEffect(() => {
-    auth().onAuthStateChanged((authenticate) => {
-      if (authenticate) {
-        setEmail(authenticate.email);
-        setName(authenticate.displayName);
-        setPhotoUrl(authenticate.photoURL);
-        // console.log(
-        //   'user photo: ',
-        //   authenticate.photoURL.slice(0, photoUrl.lastIndexOf('?')),
-        // );
-      } else {
-        navigation.replace('SignInScreen');
-      }
+    const unsubscribe = navigation.addListener('focus', () => {
+      auth().onAuthStateChanged((authenticate) => {
+        if (authenticate) {
+          setEmail(authenticate.email);
+          setName(authenticate.displayName);
+          setPhotoUrl(authenticate.photoURL);
+        } else {
+          navigation.replace('SignInScreen');
+        }
+      });
     });
-  });
+    return unsubscribe;
+  }, [navigation]);
 
   const signOutUser = () => {
     auth()
@@ -56,69 +38,10 @@ const ProfileScreen = ({navigation}) => {
       });
   };
 
-  // const saveSettings = () => {
-  //   // Create the file metadata
-  //   var metadata = {
-  //     contentType: 'image/jpeg',
-  //   };
-
-  //   // Upload file and metadata to the object 'images/mountains.jpg'
-  //   var uploadTask = storageRef
-  //     .child('images/' + photo.fileName)
-  //     .put(photo, metadata);
-
-  //   // Listen for state changes, errors, and completion of the upload.
-  //   uploadTask.on(
-  //     firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-  //     function (snapshot) {
-  //       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-  //       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //       console.log('Upload is ' + progress + '% done');
-  //       switch (snapshot.state) {
-  //         case firebase.storage.TaskState.PAUSED: // or 'paused'
-  //           console.log('Upload is paused');
-  //           break;
-  //         case firebase.storage.TaskState.RUNNING: // or 'running'
-  //           console.log('Upload is running');
-  //           break;
-  //       }
-  //     },
-  //     function (error) {
-  //       switch (error.code) {
-  //         case 'storage/unauthorized':
-  //           // User doesn't have permission to access the object
-  //           break;
-  //         case 'storage/canceled':
-  //           // User canceled the upload
-  //           break;
-  //         case 'storage/unknown':
-  //           // Unknown error occurred, inspect error.serverResponse
-  //           break;
-  //       }
-  //     },
-  //     function () {
-  //       // Upload completed successfully, now we can get the download URL
-  //       uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-  //         console.log('File available at', downloadURL);
-  //         user
-  //           .updateProfile({
-  //             photoURL: downloadURL,
-  //           })
-  //           .then(function () {
-  //             console.log('photo updated');
-  //           })
-  //           .catch(function (error) {
-  //             console.log(error.message);
-  //           });
-  //       });
-  //     },
-  //   );
-  // };
-
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <TouchableOpacity style={styles.photoView}>
+        <View style={styles.photoView}>
           <View style={styles.avatar}>
             {photoUrl ? (
               <Image
@@ -127,18 +50,7 @@ const ProfileScreen = ({navigation}) => {
                   height: 120,
                   borderRadius: 150 / 2,
                 }}
-                source={require('../assets/avatar.png')}
-              />
-            ) : photo ? (
-              <Image
-                style={{
-                  width: 120,
-                  height: 120,
-                  borderRadius: 150 / 2,
-                }}
-                source={{
-                  uri: photo.uri,
-                }}
+                source={{uri: photoUrl}}
               />
             ) : (
               <Image
@@ -147,8 +59,7 @@ const ProfileScreen = ({navigation}) => {
               />
             )}
           </View>
-          {/* <Text style={styles.choosePhotoText}>Choose photo</Text> */}
-        </TouchableOpacity>
+        </View>
         <View style={styles.userDetails}>
           <Text style={styles.detailText}>Привет, {name}</Text>
           <Text style={styles.detailText}>Вы вошли как {email}</Text>
@@ -156,9 +67,12 @@ const ProfileScreen = ({navigation}) => {
             text="Сменить пароль"
             onPress={() => navigation.navigate('ChangePasswordScreen')}
           />
+          <Button
+            text="Сменить фото"
+            onPress={() => navigation.navigate('ChangePhotoScreen')}
+          />
           <Button text="Выйти" onPress={() => signOutUser()} />
         </View>
-        {/* <Button text="Save" onPress={() => saveSettings()} /> */}
       </View>
     </View>
   );
@@ -198,11 +112,7 @@ const styles = StyleSheet.create({
     marginTop: scale(40),
     alignSelf: 'center',
     alignItems: 'center',
-    marginBottom: scale(80),
-  },
-  choosePhotoText: {
-    fontSize: scale(20),
-    marginTop: scale(10),
+    marginBottom: scale(40),
   },
 });
 

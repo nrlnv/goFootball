@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "825490852675",
+    "firebase_url": "https://gofootball1-5de6a-default-rtdb.firebaseio.com",
+    "project_id": "gofootball1-5de6a",
+    "storage_bucket": "gofootball1-5de6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825490852675:android:6313bd58957d9ca7b77df6",
+        "android_client_info": {
+          "package_name": "com.gofootball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825490852675-f2u22qr0ddi1666mcteriji95m61kt4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbvXrqUBDvB3fAcvu99ztbsYEDp4MON7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825490852675-f2u22qr0ddi1666mcteriji95m61kt4p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "825490852675-fikppmrkpq1pe6nnqb4ai41vvfp732kq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.goFootball1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
