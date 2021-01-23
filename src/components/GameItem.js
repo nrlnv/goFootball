@@ -36,7 +36,9 @@ const GameItem = ({item, city}) => {
         </View>
         <View style={styles.flexD}>
           <Icon name="phone" size={16} color={colors.cherry} />
-          <Text style={styles.bodyText}>{item.phone}</Text>
+          <Text style={styles.bodyText}>
+            {item.phone} - {item.name}
+          </Text>
         </View>
         {!item.comment || item.comment === '' ? null : (
           <View style={styles.flexD}>

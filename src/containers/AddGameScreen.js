@@ -105,6 +105,7 @@ const AddGameScreen = ({navigation}) => {
             players: _players,
             price: _price,
             addedBy: user.email,
+            name: user.displayName,
             phone: _phone,
             comment: _comment,
             addedTime: Date.now(),
