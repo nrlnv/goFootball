@@ -7,7 +7,8 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -20,8 +21,7 @@ const ForgotPasswordScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
 
   const resetPassword = (e) => {
-    firebase
-      .auth()
+    auth()
       .sendPasswordResetEmail(e)
       .then(() => {
         console.log('password reset was sent');

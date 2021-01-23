@@ -2,7 +2,8 @@
 /* eslint-disable no-alert */
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 // import * as ImagePicker from 'react-native-image-picker';
 
 import Button from '../components/Button';
@@ -29,7 +30,7 @@ const ProfileScreen = ({navigation}) => {
   // var user = firebase.auth().currentUser;
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((authenticate) => {
+    auth().onAuthStateChanged((authenticate) => {
       if (authenticate) {
         setEmail(authenticate.email);
         setName(authenticate.displayName);
@@ -45,8 +46,7 @@ const ProfileScreen = ({navigation}) => {
   });
 
   const signOutUser = () => {
-    firebase
-      .auth()
+    auth()
       .signOut()
       .then(() => {
         console.log('sign out');

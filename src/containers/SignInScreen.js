@@ -10,9 +10,8 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
-import * as firebase from 'firebase';
-import {FloatingLabelInput} from 'react-native-floating-label-input';
-
+// import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
 import Button from '../components/Button';
 import Logo from '../components/Logo';
@@ -25,8 +24,7 @@ const SignInScreen = ({navigation}) => {
   const [show, setShow] = useState(false);
 
   const signInUser = (e, p) => {
-    firebase
-      .auth()
+    auth()
       .signInWithEmailAndPassword(e, p)
       .then(() => {
         navigation.replace('MainTabs');

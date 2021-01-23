@@ -2,11 +2,12 @@ import React, {useEffect} from 'react';
 
 import {SafeAreaView, StyleSheet, ActivityIndicator} from 'react-native';
 
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
 const LoadingScreen = ({navigation}) => {
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((authenticate) => {
+    auth().onAuthStateChanged((authenticate) => {
       if (authenticate) {
         navigation.replace('VerificationScreen');
       } else {

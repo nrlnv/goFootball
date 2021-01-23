@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
 import Logo from '../components/Logo';
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
 
 const FiledsScreen = ({navigation}) => {
-  var user = firebase.auth().currentUser;
+  var user = auth().currentUser;
 
   useEffect(() => {
     isVerified();
@@ -25,8 +26,7 @@ const FiledsScreen = ({navigation}) => {
       .delete()
       .then(() => console.log('user deleted'))
       .catch((error) => console.log(error.message));
-    firebase
-      .auth()
+    auth()
       .signOut()
       .then(() => {
         console.log('back to home screen');

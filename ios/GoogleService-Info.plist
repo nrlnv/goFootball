@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>825490852675-fikppmrkpq1pe6nnqb4ai41vvfp732kq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.825490852675-fikppmrkpq1pe6nnqb4ai41vvfp732kq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBHySvWIXTKPRdvbU1Ie83NTgZq_71J2Jg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>825490852675</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.goFootball1</string>
+	<key>PROJECT_ID</key>
+	<string>gofootball1-5de6a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gofootball1-5de6a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:825490852675:ios:c8bec52179a677ccb77df6</string>
+	<key>DATABASE_URL</key>
+	<string>https://gofootball1-5de6a-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, FlatList, View, Text} from 'react-native';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import database from '@react-native-firebase/database';
 
 import FieldItem from '../components/FieldItem';
 import Header from '../components/Header';
@@ -13,7 +14,7 @@ const FiledsScreen = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    var fieldsListRef = firebase.database().ref('fields');
+    var fieldsListRef = database().ref('fields');
     fieldsListRef.on('value', (dataSnapshot) => {
       if (dataSnapshot.val()) {
         const fieldsList = Object.values(dataSnapshot.val());
@@ -42,7 +43,7 @@ const FiledsScreen = () => {
         <FlatList
           data={fields}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.address}
         />
         <View style={styles.addFieldView}>
           <Text style={styles.addFieldText}>

@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 import React, {useState} from 'react';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -8,7 +9,6 @@ import {
   SafeAreaView,
   View,
 } from 'react-native';
-// import {Form, Item, Input, Label} from 'native-base';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -21,7 +21,7 @@ const ChangePasswordScreen = ({navigation}) => {
   const [show, setShow] = useState(false);
 
   const changePassword = (p) => {
-    var user = firebase.auth().currentUser;
+    var user = auth().currentUser;
     user
       .updatePassword(p)
       .then(function () {

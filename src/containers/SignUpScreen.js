@@ -8,7 +8,8 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -23,8 +24,7 @@ const SignUpScreen = ({navigation}) => {
   const [show, setShow] = useState(false);
 
   const signUpUser = (_email, _name, _password) => {
-    firebase
-      .auth()
+    auth()
       .createUserWithEmailAndPassword(_email, _password)
       .then((authenticate) => {
         return authenticate.user

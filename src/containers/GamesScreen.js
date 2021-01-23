@@ -7,7 +7,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import database from '@react-native-firebase/database';
 
 import GameItem from '../components/GameItem';
 import Header from '../components/Header';
@@ -20,7 +21,7 @@ const MainScreen = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    var gamesListRef = firebase.database().ref('games');
+    var gamesListRef = database().ref('games');
     gamesListRef.on('value', (dataSnapshot) => {
       if (dataSnapshot.val()) {
         const gamesList = Object.values(dataSnapshot.val());
@@ -43,7 +44,7 @@ const MainScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: scale(5)}}>
           <Header text="МАТЧИ" />
           <CityPicker
             city={city}

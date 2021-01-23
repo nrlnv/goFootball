@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import MainNavigator from './src/routers/MainNavigator';
 
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 
 //production database
 
@@ -20,18 +20,18 @@ import * as firebase from 'firebase';
 
 //development database
 
-var firebaseConfig = {
-  apiKey: "AIzaSyAdHtffgYUjesadCcl30K7N3vpXP0q1G9A",
-  authDomain: "gofootball1-5de6a.firebaseapp.com",
-  databaseURL: "https://gofootball1-5de6a-default-rtdb.firebaseio.com",
-  projectId: "gofootball1-5de6a",
-  storageBucket: "gofootball1-5de6a.appspot.com",
-  messagingSenderId: "825490852675",
-  appId: "1:825490852675:web:043cfc9db17bdbc3b77df6",
-  measurementId: "G-SY9SWJW5PE"
-};
+// var firebaseConfig = {
+//   apiKey: "AIzaSyAdHtffgYUjesadCcl30K7N3vpXP0q1G9A",
+//   authDomain: "gofootball1-5de6a.firebaseapp.com",
+//   databaseURL: "https://gofootball1-5de6a-default-rtdb.firebaseio.com",
+//   projectId: "gofootball1-5de6a",
+//   storageBucket: "gofootball1-5de6a.appspot.com",
+//   messagingSenderId: "825490852675",
+//   appId: "1:825490852675:web:043cfc9db17bdbc3b77df6",
+//   measurementId: "G-SY9SWJW5PE"
+// };
 
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 
 const App = () => {
   useEffect(() => {

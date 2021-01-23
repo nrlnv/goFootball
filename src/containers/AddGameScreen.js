@@ -1,6 +1,8 @@
 /* eslint-disable no-alert */
 import React, {useState} from 'react';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -62,7 +64,7 @@ const AddGameScreen = ({navigation}) => {
     ).test(_phone.substring(2));
   };
 
-  var user = firebase.auth().currentUser;
+  var user = auth().currentUser;
 
   const addGame = (
     _city,
@@ -93,7 +95,7 @@ const AddGameScreen = ({navigation}) => {
       alert('Заполните все поля');
     } else {
       if (isPhoneValid(_phone)) {
-        var messageListRef = firebase.database().ref('games');
+        var messageListRef = database().ref('games');
         var newMessageRef = messageListRef.push();
         newMessageRef
           .set({
