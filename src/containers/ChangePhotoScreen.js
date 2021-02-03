@@ -30,7 +30,6 @@ const ChangePhotoScreen = ({navigation}) => {
     ImagePicker.launchImageLibrary(options, (response) => {
       if (response.uri) {
         setPhoto(response);
-        // saveSettings();
         console.log('image: ', response);
       }
     });
@@ -39,10 +38,9 @@ const ChangePhotoScreen = ({navigation}) => {
   var user = auth().currentUser;
 
   const saveSettings = () => {
-    // const {uri} = photo;
-    const filename = photo.uri.substring(photo.uri.lastIndexOf('/') + 1);
-    const uploadUri =
-      Platform.OS === 'ios' ? photo.uri.replace('file://', '') : uri;
+    const {uri} = photo;
+    const filename = uri.substring(uri.lastIndexOf('/') + 1);
+    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
     var uploadTask = storage().ref(filename).putFile(uploadUri);
 
     // Listen for state changes, errors, and completion of the upload.

@@ -5,9 +5,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  LogBox,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-// import * as firebase from 'firebase';
 import database from '@react-native-firebase/database';
 
 import GameItem from '../components/GameItem';
@@ -37,14 +38,53 @@ const MainScreen = ({navigation}) => {
     });
   }, []);
 
+  const onRemovePress = (item) => {
+    var query = database()
+      .ref('games')
+      .orderByChild('addedTime')
+      .equalTo(item.addedTime);
+    query.once('value', function (snapshot) {
+      snapshot.forEach(function (child) {
+        child.ref.remove();
+      });
+    });
+    console.log('pressed');
+  };
+
+  const createTwoButtonAlert = (item) =>
+    Alert.alert(
+      'Удаление матча',
+      'Вы хотите удалить матч?',
+      [
+        {
+          text: 'Нет',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'Да', onPress: () => onRemovePress(item)},
+      ],
+      {cancelable: false},
+    );
+
   const renderItem = ({item}) => {
-    return <GameItem item={item} city={city} />;
+    return (
+      <GameItem
+        item={item}
+        city={city}
+        onRemovePress={() => createTwoButtonAlert(item)}
+      />
+    );
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: scale(5)}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: scale(10),
+          }}>
           <Header text="МАТЧИ" />
           <CityPicker
             city={city}
@@ -115,5 +155,7 @@ const styles = StyleSheet.create({
     marginLeft: scale(20),
   },
 });
+
+LogBox.ignoreLogs(['Sending...']);
 
 export default MainScreen;

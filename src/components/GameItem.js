@@ -1,19 +1,28 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 
 import {colors, scale} from '../constants/globalStyles';
+import auth from '@react-native-firebase/auth';
 
-const GameItem = ({item, city}) => {
+const GameItem = ({item, city, onRemovePress}) => {
   const currentDate = new Date();
+  var email = auth().currentUser.email;
 
   return currentDate.getTime() < moment(item.day).add(1, 'hours') &&
     city === item.city ? (
     <View style={styles.mainView}>
       <View style={styles.headerView}>
         <Text style={styles.headerText}>{item.field}</Text>
+        {email === item.addedBy ? (
+          <TouchableOpacity
+            style={{position: 'absolute', right: 0}}
+            onPress={onRemovePress}>
+            <Icon1 name="trash-can-outline" size={24} color={colors.cherry} />
+          </TouchableOpacity>
+        ) : null}
       </View>
       <View>
         <View style={styles.flexD}>
