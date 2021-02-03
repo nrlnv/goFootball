@@ -2,7 +2,6 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import GamesScreen from '../containers/GamesScreen';
 import ProfileScreen from '../containers/ProfileScreen';
@@ -53,7 +52,7 @@ const MainTabs = () => {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'НАСТРОЙКИ',
+          tabBarLabel: 'ПРОФИЛЬ',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="person-outline" color={color} size={30} />
           ),

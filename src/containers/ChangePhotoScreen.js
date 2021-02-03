@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, {useState} from 'react';
 import {
   SafeAreaView,
@@ -38,60 +39,66 @@ const ChangePhotoScreen = ({navigation}) => {
   var user = auth().currentUser;
 
   const saveSettings = () => {
-    const {uri} = photo;
-    const filename = uri.substring(uri.lastIndexOf('/') + 1);
-    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-    var uploadTask = storage().ref(filename).putFile(uploadUri);
+    if (!photo) {
+      alert('Выберите фото');
+    } else {
+      const {uri} = photo;
+      const filename = uri.substring(uri.lastIndexOf('/') + 1);
+      const uploadUri =
+        Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+      var uploadTask = storage().ref(filename).putFile(uploadUri);
 
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(
-      storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-      function (snapshot) {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        setIsUploading(true);
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        switch (snapshot.state) {
-          case storage.TaskState.PAUSED: // or 'paused'
-            console.log('Upload is paused');
-            break;
-          case storage.TaskState.RUNNING: // or 'running'
-            console.log('Upload is running');
-            break;
-        }
-      },
-      function (error) {
-        switch (error.code) {
-          case 'storage/unauthorized':
-            // User doesn't have permission to access the object
-            break;
-          case 'storage/canceled':
-            // User canceled the upload
-            break;
-          case 'storage/unknown':
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-        }
-      },
-      function () {
-        // Upload completed successfully, now we can get the download URL
-        setIsUploading(false);
-        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-          console.log('File available at', downloadURL);
-          user
-            .updateProfile({
-              photoURL: downloadURL,
-            })
-            .then(function () {
-              console.log('photo updated');
-            })
-            .catch(function (error) {
-              console.log(error.message);
-            });
-        });
-        navigation.goBack();
-      },
-    );
+      // Listen for state changes, errors, and completion of the upload.
+      uploadTask.on(
+        storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+        function (snapshot) {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          setIsUploading(true);
+          var progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case storage.TaskState.PAUSED: // or 'paused'
+              console.log('Upload is paused');
+              break;
+            case storage.TaskState.RUNNING: // or 'running'
+              console.log('Upload is running');
+              break;
+          }
+        },
+        function (error) {
+          switch (error.code) {
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+            case 'storage/unknown':
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+        },
+        function () {
+          // Upload completed successfully, now we can get the download URL
+          setIsUploading(false);
+          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            console.log('File available at', downloadURL);
+            user
+              .updateProfile({
+                photoURL: downloadURL,
+              })
+              .then(function () {
+                console.log('photo updated');
+              })
+              .catch(function (error) {
+                console.log(error.message);
+              });
+          });
+          navigation.goBack();
+        },
+      );
+    }
   };
 
   return (

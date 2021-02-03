@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-alert */
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
@@ -46,8 +47,8 @@ const ProfileScreen = ({navigation}) => {
             {photoUrl ? (
               <Image
                 style={{
-                  width: 120,
-                  height: 120,
+                  width: 100,
+                  height: 100,
                   borderRadius: 150 / 2,
                 }}
                 source={{uri: photoUrl}}
@@ -59,17 +60,19 @@ const ProfileScreen = ({navigation}) => {
               />
             )}
           </View>
+          <Text style={styles.detailText}>
+            {name} {'\n'} {email}
+          </Text>
+          <TouchableOpacity
+            style={styles.editView}
+            onPress={() => navigation.navigate('ChangePhotoScreen')}>
+            <Icon name="account-edit-outline" size={30} color={colors.cherry} />
+          </TouchableOpacity>
         </View>
         <View style={styles.userDetails}>
-          <Text style={styles.detailText}>Привет, {name}</Text>
-          <Text style={styles.detailText}>Вы вошли как {email}</Text>
           <Button
             text="Сменить пароль"
             onPress={() => navigation.navigate('ChangePasswordScreen')}
-          />
-          <Button
-            text="Сменить фото"
-            onPress={() => navigation.navigate('ChangePhotoScreen')}
           />
           <Button text="Выйти" onPress={() => signOutUser()} />
         </View>
@@ -90,29 +93,47 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: scale(40),
   },
   userDetails: {
-    backgroundColor: colors.marzipan,
     marginHorizontal: scale(20),
     padding: scale(20),
     borderRadius: scale(20),
   },
   detailText: {
-    alignSelf: 'center',
-    fontSize: scale(15),
+    textAlign: 'center',
+    fontSize: scale(20),
+    fontWeight: '600',
     color: colors.cherry,
   },
   avatar: {
-    backgroundColor: colors.marzipan,
+    backgroundColor: colors.cherry,
     borderRadius: scale(150 / 2),
-    width: scale(120),
-    height: scale(120),
+    width: scale(100),
+    height: scale(100),
     justifyContent: 'center',
     alignItems: 'center',
   },
   photoView: {
     marginTop: scale(40),
+    marginBottom: scale(40),
     alignSelf: 'center',
     alignItems: 'center',
-    marginBottom: scale(40),
+    backgroundColor: colors.marzipan,
+    width: scale(320),
+    height: scale(170),
+    paddingVertical: scale(10),
+    borderRadius: scale(20),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: scale(0.95),
+    shadowRadius: scale(5.84),
+    elevation: scale(5),
+  },
+  editView: {
+    position: 'absolute',
+    top: scale(10),
+    right: scale(10),
   },
 });
 
