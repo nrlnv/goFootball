@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, FlatList, View, Text} from 'react-native';
 // import * as firebase from 'firebase';
 import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
 import FieldItem from '../components/FieldItem';
 import Header from '../components/Header';
@@ -12,6 +13,7 @@ const FiledsScreen = () => {
   const [fields, setFields] = useState(null);
   const [city, setCity] = useState('Орал');
   const [showModal, setShowModal] = useState(false);
+  const uid = auth().currentUser.uid;
 
   useEffect(() => {
     var fieldsListRef = database().ref('fields');
@@ -21,7 +23,15 @@ const FiledsScreen = () => {
         setFields(fieldsList);
       }
     });
-  }, []);
+    var userRef = database().ref('/users/' + uid);
+    userRef.on('value', (dataSnapshot) => {
+      if (dataSnapshot.val()) {
+        const userDetail = Object.values(dataSnapshot.val());
+        // console.log('city: ', fieldsList[1]);
+        setCity(userDetail[1]);
+      }
+    });
+  }, [uid]);
 
   const renderItem = ({item}) => {
     return <FieldItem item={item} city={city} />;

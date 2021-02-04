@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -13,14 +13,23 @@ import {
 import * as ImagePicker from 'react-native-image-picker';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
+import database from '@react-native-firebase/database';
 
 import Button from '../components/Button';
+import Input from '../components/Input';
+import CityPicker from '../components/CityPicker';
 import BackButton from '../components/BackButton';
 import {colors, scale} from '../constants/globalStyles';
 
 const ChangePhotoScreen = ({navigation}) => {
+  var user = auth().currentUser;
   const [photo, setPhoto] = useState(null);
+  const [city, setCity] = useState('Орал');
+  const [name, setName] = useState(user.displayName);
+  const [showModal, setShowModal] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const email = user.email;
+  const uid = user.uid;
 
   const handleChoosePhoto = () => {
     const options = {
@@ -31,17 +40,40 @@ const ChangePhotoScreen = ({navigation}) => {
     ImagePicker.launchImageLibrary(options, (response) => {
       if (response.uri) {
         setPhoto(response);
-        console.log('image: ', response);
+        // console.log('image: ', response);
       }
     });
   };
 
-  var user = auth().currentUser;
+  // console.log('uid: ', uid);
 
-  const saveSettings = () => {
+  const saveSettings = (_name, _city) => {
     if (!photo) {
-      alert('Выберите фото');
+      user
+        .updateProfile({
+          displayName: _name,
+        })
+        .then(function () {
+          database()
+            .ref('/users/' + uid)
+            .set({
+              name: _name,
+              city: _city,
+              email: email,
+            })
+            .then(() => {
+              console.log('COMPLETED');
+              navigation.goBack();
+            })
+            .catch((error) => {
+              alert(error.message);
+            });
+        })
+        .catch(function (error) {
+          console.log(error.message);
+        });
     } else {
+      // console.log(uid);
       const {uri} = photo;
       const filename = uri.substring(uri.lastIndexOf('/') + 1);
       const uploadUri =
@@ -87,9 +119,21 @@ const ChangePhotoScreen = ({navigation}) => {
             user
               .updateProfile({
                 photoURL: downloadURL,
+                displayName: _name,
               })
               .then(function () {
                 console.log('photo updated');
+                database()
+                  .ref('/users/' + uid)
+                  .set({
+                    name: _name,
+                    city: _city,
+                    email: email,
+                  })
+                  .then(() => console.log('COMPLETED'))
+                  .catch((error) => {
+                    alert(error.message);
+                  });
               })
               .catch(function (error) {
                 console.log(error.message);
@@ -104,7 +148,7 @@ const ChangePhotoScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <BackButton />
-      <View>
+      <View style={styles.form}>
         <TouchableOpacity
           style={styles.photoView}
           onPress={() => handleChoosePhoto()}>
@@ -112,8 +156,8 @@ const ChangePhotoScreen = ({navigation}) => {
             {photo ? (
               <Image
                 style={{
-                  width: 120,
-                  height: 120,
+                  width: scale(100),
+                  height: scale(100),
                   borderRadius: 150 / 2,
                 }}
                 source={{
@@ -123,7 +167,7 @@ const ChangePhotoScreen = ({navigation}) => {
             ) : (
               <Image
                 source={require('../assets/avatar.png')}
-                style={{width: 100, height: 100}}
+                style={{width: scale(100), height: scale(100)}}
               />
             )}
           </View>
@@ -132,11 +176,27 @@ const ChangePhotoScreen = ({navigation}) => {
             <ActivityIndicator
               style={styles.activityIndicatorView}
               size="large"
-              color={colors.marzipan}
+              color={colors.cherry}
             />
           ) : null}
         </TouchableOpacity>
-        <Button text="СОХРАНИТЬ" onPress={() => saveSettings()} />
+        <Input
+          label="Имя"
+          value={name}
+          onChangeText={(value) => setName(value)}
+        />
+        <View style={styles.cityPickerView}>
+          <CityPicker
+            city={city}
+            onPress={() => setShowModal(true)}
+            showModal={showModal}
+            onBackdropPress={() => setShowModal(false)}
+            onValueChange={(value) => setCity(value)}
+            onPressButton={() => setShowModal(false)}
+            addGame={true}
+          />
+        </View>
+        <Button text="СОХРАНИТЬ" onPress={() => saveSettings(name, city)} />
       </View>
     </SafeAreaView>
   );
@@ -147,27 +207,42 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.mulled,
   },
-  avatar: {
+  form: {
+    marginTop: scale(10),
+    padding: scale(20),
+    width: '90%',
     backgroundColor: colors.marzipan,
+    marginHorizontal: scale(20),
+    borderRadius: scale(20),
+  },
+  avatar: {
+    backgroundColor: colors.cherry,
     borderRadius: scale(150 / 2),
-    width: scale(120),
-    height: scale(120),
+    width: scale(100),
+    height: scale(100),
     justifyContent: 'center',
     alignItems: 'center',
   },
   photoView: {
-    marginTop: scale(80),
+    marginTop: scale(10),
     alignSelf: 'center',
     alignItems: 'center',
     marginBottom: scale(10),
   },
   choosePhotoText: {
     fontSize: scale(15),
-    color: colors.marzipan,
+    color: colors.cherry,
   },
   activityIndicatorView: {
     alignSelf: 'center',
     marginTop: scale(10),
+  },
+  cityPickerView: {
+    borderColor: colors.cherry,
+    borderWidth: scale(2),
+    padding: scale(10),
+    paddingLeft: scale(20),
+    borderRadius: scale(10),
   },
 });
 

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
 import GameItem from '../components/GameItem';
 import Header from '../components/Header';
@@ -20,6 +21,7 @@ const MainScreen = ({navigation}) => {
   const [games, setGames] = useState(null);
   const [city, setCity] = useState('Орал');
   const [showModal, setShowModal] = useState(false);
+  const uid = auth().currentUser.uid;
 
   useEffect(() => {
     var gamesListRef = database().ref('games');
@@ -36,7 +38,15 @@ const MainScreen = ({navigation}) => {
         setGames(gamesList);
       }
     });
-  }, []);
+    var userRef = database().ref('/users/' + uid);
+    userRef.on('value', (dataSnapshot) => {
+      if (dataSnapshot.val()) {
+        const userDetail = Object.values(dataSnapshot.val());
+        // console.log('city: ', fieldsList[1]);
+        setCity(userDetail[1]);
+      }
+    });
+  }, [uid]);
 
   const onRemovePress = (item) => {
     var query = database()

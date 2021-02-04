@@ -294,6 +294,7 @@ const styles = StyleSheet.create({
     borderColor: colors.cherry,
     borderWidth: scale(2),
     padding: scale(10),
+    paddingLeft: scale(20),
     borderRadius: scale(10),
   },
   datepickerText: {

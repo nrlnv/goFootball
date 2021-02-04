@@ -3,30 +3,46 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
 
 const ProfileScreen = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [photoUrl, setPhotoUrl] = useState(null);
+  const user = auth().currentUser;
+
+  // const [email, setEmail] = useState('');
+  // const [name, setName] = useState('');
+  const name = user.displayName;
+  const email = user.email;
+  const uid = user.uid;
+  const photoUrl = user.photoURL;
+  const [city, setCity] = useState('');
+  // const [photoUrl, setPhotoUrl] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      auth().onAuthStateChanged((authenticate) => {
-        if (authenticate) {
-          setEmail(authenticate.email);
-          setName(authenticate.displayName);
-          setPhotoUrl(authenticate.photoURL);
-        } else {
-          navigation.replace('SignInScreen');
-        }
-      });
+    // const unsubscribe = navigation.addListener('focus', () => {
+    //   auth().onAuthStateChanged((authenticate) => {
+    //     if (authenticate) {
+    //       setEmail(authenticate.email);
+    //       setName(authenticate.displayName);
+    //       setPhotoUrl(authenticate.photoURL);
+    //     } else {
+    //       navigation.replace('SignInScreen');
+    //     }
+    //   });
+    // });
+    var userRef = database().ref('/users/' + uid);
+    userRef.on('value', (dataSnapshot) => {
+      if (dataSnapshot.val()) {
+        const userDetail = Object.values(dataSnapshot.val());
+        // console.log('city: ', fieldsList[1]);
+        setCity(userDetail[1]);
+      }
     });
-    return unsubscribe;
-  }, [navigation]);
+    // return unsubscribe;
+  }, [uid]);
 
   const signOutUser = () => {
     auth()
@@ -61,7 +77,7 @@ const ProfileScreen = ({navigation}) => {
             )}
           </View>
           <Text style={styles.detailText}>
-            {name} {'\n'} {email}
+            {name} {'\n'} {email} {'\n'} {city}
           </Text>
           <TouchableOpacity
             style={styles.editView}
@@ -118,7 +134,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.marzipan,
     width: scale(320),
-    height: scale(170),
+    height: scale(190),
     paddingVertical: scale(10),
     borderRadius: scale(20),
     shadowColor: '#000',

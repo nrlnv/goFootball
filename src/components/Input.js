@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {FloatingLabelInput} from 'react-native-floating-label-input';
 
 import {colors, scale} from '../constants/globalStyles';
