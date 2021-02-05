@@ -18,7 +18,7 @@ const ProfileScreen = ({navigation}) => {
   const email = user.email;
   const uid = user.uid;
   const photoUrl = user.photoURL;
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState('Орал');
   // const [photoUrl, setPhotoUrl] = useState(null);
 
   useEffect(() => {
