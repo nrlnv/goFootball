@@ -26,6 +26,7 @@ const ChangePhotoScreen = ({navigation}) => {
   const [photo, setPhoto] = useState(null);
   const [city, setCity] = useState('Орал');
   const [name, setName] = useState(user.displayName);
+  const photoUrl = user.photoURL;
   const [showModal, setShowModal] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const email = user.email;
@@ -49,6 +50,7 @@ const ChangePhotoScreen = ({navigation}) => {
 
   const saveSettings = (_name, _city) => {
     if (!photo) {
+      setIsUploading(true);
       user
         .updateProfile({
           displayName: _name,
@@ -62,7 +64,8 @@ const ChangePhotoScreen = ({navigation}) => {
               email: email,
             })
             .then(() => {
-              console.log('COMPLETED');
+              // console.log('COMPLETED');
+              setIsUploading(false);
               navigation.goBack();
             })
             .catch((error) => {
@@ -155,19 +158,17 @@ const ChangePhotoScreen = ({navigation}) => {
           <View style={styles.avatar}>
             {photo ? (
               <Image
-                style={{
-                  width: scale(100),
-                  height: scale(100),
-                  borderRadius: 150 / 2,
-                }}
+                style={styles.imageView}
                 source={{
                   uri: photo.uri,
                 }}
               />
+            ) : photoUrl ? (
+              <Image style={styles.imageView} source={{uri: photoUrl}} />
             ) : (
               <Image
                 source={require('../assets/avatar.png')}
-                style={{width: scale(100), height: scale(100)}}
+                style={{width: 100, height: 100}}
               />
             )}
           </View>
@@ -243,6 +244,11 @@ const styles = StyleSheet.create({
     padding: scale(10),
     paddingLeft: scale(20),
     borderRadius: scale(10),
+  },
+  imageView: {
+    width: scale(100),
+    height: scale(100),
+    borderRadius: 150 / 2,
   },
 });
 

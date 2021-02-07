@@ -5,6 +5,7 @@ import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useIsFocused} from '@react-navigation/native';
 
 import Button from '../components/Button';
 import {colors, scale} from '../constants/globalStyles';
@@ -17,32 +18,38 @@ const ProfileScreen = ({navigation}) => {
   const name = user.displayName;
   const email = user.email;
   const uid = user.uid;
-  const photoUrl = user.photoURL;
+  // const photoUrl = user.photoURL;
   const [city, setCity] = useState('Орал');
-  // const [photoUrl, setPhotoUrl] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    // const unsubscribe = navigation.addListener('focus', () => {
-    //   auth().onAuthStateChanged((authenticate) => {
-    //     if (authenticate) {
-    //       setEmail(authenticate.email);
-    //       setName(authenticate.displayName);
-    //       setPhotoUrl(authenticate.photoURL);
-    //     } else {
-    //       navigation.replace('SignInScreen');
-    //     }
-    //   });
-    // });
-    var userRef = database().ref('/users/' + uid);
-    userRef.on('value', (dataSnapshot) => {
-      if (dataSnapshot.val()) {
-        const userDetail = Object.values(dataSnapshot.val());
-        // console.log('city: ', fieldsList[1]);
-        setCity(userDetail[1]);
+    // const unsubscribe = navigation.addListener('didFocus', () => {
+    auth().onAuthStateChanged((authenticate) => {
+      if (authenticate) {
+        // setEmail(authenticate.email);
+        // setName(authenticate.displayName);
+        setPhotoUrl(authenticate.photoURL);
+      } else {
+        navigation.replace('SignInScreen');
       }
     });
+    var userRef = database().ref('/users/' + uid);
+    userRef.once('value').then((snapshot) => {
+      // console.log('User data: ', snapshot.val().city);
+      setCity(snapshot.val().city);
+    });
+    // });
+    // userRef.on('value', (dataSnapshot) => {
+    //   if (dataSnapshot.val()) {
+    //     const userDetail = Object.values(dataSnapshot.val());
+    //     // console.log('city: ', fieldsList[1]);
+    //     setCity(userDetail[0]);
+    //     console.log(userDetail);
+    //   }
+    // });
     // return unsubscribe;
-  }, [uid]);
+  }, [navigation, uid, isFocused]);
 
   const signOutUser = () => {
     auth()
@@ -61,14 +68,7 @@ const ProfileScreen = ({navigation}) => {
         <View style={styles.photoView}>
           <View style={styles.avatar}>
             {photoUrl ? (
-              <Image
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 150 / 2,
-                }}
-                source={{uri: photoUrl}}
-              />
+              <Image style={styles.imageView} source={{uri: photoUrl}} />
             ) : (
               <Image
                 source={require('../assets/avatar.png')}
@@ -150,6 +150,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: scale(10),
     right: scale(10),
+  },
+  imageView: {
+    width: scale(100),
+    height: scale(100),
+    borderRadius: 150 / 2,
   },
 });
 

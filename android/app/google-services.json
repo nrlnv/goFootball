@@ -1,38 +1,38 @@
 {
   "project_info": {
-    "project_number": "825490852675",
-    "firebase_url": "https://gofootball1-5de6a-default-rtdb.firebaseio.com",
-    "project_id": "gofootball1-5de6a",
-    "storage_bucket": "gofootball1-5de6a.appspot.com"
+    "project_number": "131942562780",
+    "firebase_url": "https://gofootball-84467-default-rtdb.firebaseio.com",
+    "project_id": "gofootball-84467",
+    "storage_bucket": "gofootball-84467.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:825490852675:android:6313bd58957d9ca7b77df6",
+        "mobilesdk_app_id": "1:131942562780:android:8d044df3cbe4b28ec4ad19",
         "android_client_info": {
           "package_name": "com.gofootball"
         }
       },
       "oauth_client": [
         {
-          "client_id": "825490852675-f2u22qr0ddi1666mcteriji95m61kt4p.apps.googleusercontent.com",
+          "client_id": "131942562780-j7nkiqddgukijld91v7r726ac5a2l71n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAbvXrqUBDvB3fAcvu99ztbsYEDp4MON7w"
+          "current_key": "AIzaSyAQYrJQaI699Mba53ovarUgLz0Hh3tD2Bc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "825490852675-f2u22qr0ddi1666mcteriji95m61kt4p.apps.googleusercontent.com",
+              "client_id": "131942562780-j7nkiqddgukijld91v7r726ac5a2l71n.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "825490852675-fikppmrkpq1pe6nnqb4ai41vvfp732kq.apps.googleusercontent.com",
+              "client_id": "131942562780-iujksgtptk7a27004gntjq344sea6b0t.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "org.reactjs.native.example.goFootball1"

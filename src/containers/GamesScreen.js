@@ -11,6 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
+import {useIsFocused} from '@react-navigation/native';
 
 import GameItem from '../components/GameItem';
 import Header from '../components/Header';
@@ -22,12 +23,14 @@ const MainScreen = ({navigation}) => {
   const [city, setCity] = useState('Орал');
   const [showModal, setShowModal] = useState(false);
   const uid = auth().currentUser.uid;
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     var gamesListRef = database().ref('games');
     gamesListRef.on('value', (dataSnapshot) => {
       if (dataSnapshot.val()) {
         const gamesList = Object.values(dataSnapshot.val());
+        // console.log('gameslist: ', gamesList);
         gamesList
           .sort(function compare(a, b) {
             var dateA = new Date(a.day);
@@ -39,14 +42,18 @@ const MainScreen = ({navigation}) => {
       }
     });
     var userRef = database().ref('/users/' + uid);
-    userRef.on('value', (dataSnapshot) => {
-      if (dataSnapshot.val()) {
-        const userDetail = Object.values(dataSnapshot.val());
-        // console.log('city: ', fieldsList[1]);
-        setCity(userDetail[1]);
-      }
+    userRef.once('value').then((snapshot) => {
+      // console.log('User data: ', snapshot.val().city);
+      setCity(snapshot.val().city);
     });
-  }, [uid]);
+    // userRef.on('value', (dataSnapshot) => {
+    //   if (dataSnapshot.val()) {
+    //     const userDetail = Object.values(dataSnapshot.val());
+    //     // setUserList(userDetail);
+    //     console.log('city: ', userDetail);
+    //   }
+    // });
+  }, [uid, isFocused]);
 
   const onRemovePress = (item) => {
     var query = database()
